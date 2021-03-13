@@ -1,0 +1,10 @@
+{% extends 'homepage/main.html' %}
+
+{% block content %}
+
+{% include 'homepage/navbar.html' %}
+
+    <h1>Successfully logout</h1>
+    
+    <h3> Already have an Account?<a href="{% url 'profiles:login' %}">Login</a></h3>
+{% endblock %}

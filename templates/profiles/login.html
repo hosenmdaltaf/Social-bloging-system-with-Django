@@ -1,0 +1,27 @@
+{% extends 'homepage/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% include 'homepage/navbar.html' %}
+
+<h1 class="col-md-6 offset-md-3 btn-secondary">Wellcome Back</h1> 
+    <form class="site-form" action="{% url 'profiles:login'  %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+              {{ form|crispy }}
+            </div>
+            
+          </div>
+          <button type="submit" class="btn btn-success col-md-6 offset-md-3">sign up</button>
+        </form>
+    </form>
+
+    <h2 class="col-md-6 offset-md-3">Don't have account!<a href="{% url 'profiles:signup' %}">Signup</a></h2> 
+
+
+{% endblock%}
+
+<!-- <div class=" row mb-3">
+    {{form}}
+</div> -->

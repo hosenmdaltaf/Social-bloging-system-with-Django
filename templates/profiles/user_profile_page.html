@@ -1,0 +1,166 @@
+
+{% extends 'homepage/main.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'homepage/navbar.html' %}
+   
+   <div class="container emp-profile">
+        {% comment %} <form method="post"> {% endcomment %}
+            <div class="row ">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="{{ user.profile.profile_picture.url }}" alt=""/>
+                        {% comment %} <div class="file btn btn-lg btn-primary">
+                            Change Photo
+                            <input type="file" name="file"/>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="profile-head">
+
+                        <div class="profile-first">
+                                <h1 class="mb-3">
+                                    {{request.user.profile.full_name}}
+                                </h1>
+                                  <p class="mb-3">@
+                                    {{request.user.username}}
+                                </p>
+                                <h6 class="mb-3">
+                                    {{request.user.profile.bio}}                               
+                                </h6>
+                                <div class="ml-3 mb-5 w-100 ">
+                                    <div class="p-2  d-flex justify-content-between rounded text-white stats ">
+                                        <div class="d-flex flex-column"> <span class="articles">Articles</span> <span class="number1">38</span> </div>
+                                        <div class="d-flex flex-column"> <span class="followers">Followers</span> <span class="number2">980</span> </div>
+                                        <div class="d-flex flex-column"> <span class="rating">Rating</span> <span class="number3">8.9</span> </div>
+                                    </div>
+                                    <div class=" button mb-5 mt-2 d-flex flex-row align-items-center "> 
+                                        <button class="btn btn-sm btn-outline-primary w-50  ">Chat</button> 
+                                        <button class="btn btn-sm btn-primary w-50 ml-2 ">Follow</button> 
+                                    </div>
+                                </div>
+                            </div>  
+                    </div>
+                </div>
+
+                 {% if request.user.is_authenticated %}
+                    {% if user.id == profiles.user.id %} 
+                         <div class="col-md-2">
+                         <a href='{% url 'profiles:profile_update' profiles.id %}'>
+                         <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                         </a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+
+              
+            </div>
+            <div class="row">
+                     <!-- Nav tabs -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">About</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Articles</button>
+                </li>
+                </ul>
+
+                <div class="col-md-12">
+<!-- Tab panes -->
+<div class="tab-content">
+
+<!-- first child Tab panes -->
+  <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+ 
+                    <div class=" profile-tab" >    
+                                <div class="row">
+
+                                 <h2 class="profile-works">{{request.user.username}}'s detail description</h2>
+
+                                        <div class="col-md-6">
+                                         <label>Email</label>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p> {{request.user.profile.email}} </p>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Date of fallen love</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p> {{request.user.profile.date_joined}} </p>
+                                        </div>
+                                    </div>
+
+                                       <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Education</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p> {{request.user.profile.educations}} </p>
+                                        </div>
+                                    </div>
+
+                                       <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Loaction</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p> {{request.user.profile.loaction}} </p>
+                                        </div>
+                                    </div>
+
+
+                                    <h2 class="profile-works">Skills</h2>
+                                         <div class="profile-first">
+                                            <h5 style='color:#333' class="mb-3">
+                                                {{request.user.profile.work}}
+                                            </h5>
+                                        </div>
+                                      
+                                               
+                                      <h2 class="profile-works">WORK LINK</h2>          
+                                     
+                                     <div class="profile-first">
+                                            <h5 style='color:#333' class="mb-3">
+                                                {% comment %} {{request.user.profile.sociallink}} {% endcomment %}
+                                            </h5>
+                                    </div>
+                               {% if request.user.is_authenticated %}
+                                    {% if user.id == profiles.user.id %}
+                                            <div class="profile-first">
+                                                <a href="{% url 'profiles:profile_delete' profiles.id %} ">
+                                                <h5 style='color:#red' class="mb-3">Delete Account</h5></a>
+                                            </div>
+                                    {% endif %}
+                               {% endif %}
+
+
+                        </div>
+
+                            <!--finish first Tab panes -->
+                            </div>
+
+                            <!-- second child Tab panes -->
+                            <div class="tab-pane profile-tab" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            
+                                        <p>There will all posts by user</p>
+
+                            <!--finish second Tab panes -->
+                            </div>
+
+                            </div>
+                            </div>
+
+            </div>
+        {% comment %} </form>            {% endcomment %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,267 @@
+
+{%extends 'homepage/main.html' %}
+{% load static %}
+{% block content %}
+
+    <section id="sidebar">
+      <section class="title-container">
+        <img src="{% static 'images/aa.jpg' %}" width="40px" alt="logo" />
+        <h1>Altaf.com</h1>
+      </section>
+      <hr>
+      <section class="links-container">
+     <a href="{% url 'user_feeds:profile-page' %}" class="nav__link active">
+        <div class="links">
+          <div class="icon">
+            <i class='bx bxs-home'></i>
+          </div>
+          <span>Home</span>
+        </div>
+      </a>
+
+     <a href="#" class="nav__link">
+        <div class="links">
+          <div class="icon">
+            <i class='bx bxs-message-rounded-dots'></i>
+          </div>
+          <span>Messages</span>
+        </div>
+      </a>
+
+        <a href="#" class="nav__link">
+        <div class="links">
+          <div class="icon">
+            <i class='bx bx-infinite'></i>
+          </div>
+          <span>Dig Drive</span>
+        </div>
+      </a>
+          <a href="#" class="nav__link">
+        <div class="links">
+          <div class="icon">
+            <i class='bx bx-note'></i>
+          </div>
+          <span>Favorites</span>
+        </div>
+      </a>
+
+      <a href="#" class="nav__link">
+        <div class="links">
+           <div class="icon">
+             <i class='bx bx-group'></i>
+          </div>
+          <span> Forum</span>
+        </div>
+    </a>
+
+    <a href="#" class="nav__link">
+        <div class="links">
+           <div class="icon">
+             <i class='bx bxs-bell'></i>
+          </div>
+          <span>Notifications </span>
+        </div>
+    </a>
+
+     <a href="{% url 'profiles:profile_create' %}" class="nav__link">
+        <div class="links">
+          <div class="icon">
+              <i class='bx bxs-user'></i>
+          </div>
+          <span>Profile Creations</span>
+        </div>
+          </a>
+
+    <a href="{% url 'profiles:profile_update' user.profile.id  %}" class="nav__link">
+    {% comment %} {% url 'account:edit'  user.id %} {% endcomment %}
+        <div class="links">
+          <div class="icon">
+          <i class='bx bxs-wrench'></i>
+          </div>
+          <span>Settings</span>
+        </div>
+          </a> 
+
+        <a href="{% url 'profiles:my_profile' %}" class="nav__link">
+        <div class="links">
+          <div class="icon">
+              <i class='bx bxs-user'></i>
+          </div>
+          <span>Profile</span>
+        </div>
+          </a>
+
+      </section>
+
+     <hr>
+     <section class="title-container">
+        <a href="{% url 'user_feeds:post-create' %}" class="nav__link">
+        <div class="links">
+          <div class="icon">
+             <i class='bx bx-export'></i>
+          </div>
+          <h1>Post</h1>
+        </div>
+          </a>
+      </section>
+
+    </section>
+
+    <section id="main-dashboard-content">
+      <section id="top-section">
+        <div class="input-box">
+          <input placeholder="Search..." />
+          <div>
+            <i class='bx bx-search-alt-2'></i>
+          </div>
+        </div>
+        <div class="action-icons">
+
+          <div id="toggle_button" class="action-icon-one">
+		  <i id="icon_show_hide" class='bx bxs-show'></i></div>
+          <div class="action-icon-two"><img src="{{ request.user.profile_image.url }}"></div>
+        </div>
+      </section>
+
+
+      <div class="secondnavbar">
+    <h2>Latest</h2>
+    <h2>Toprated</h2>
+    <h2>Trending</h2>
+    {% for cat in allposts %}
+ 
+        <h2>{{cat.category}}</h2>
+
+    {% endfor %}
+   
+   
+  </div>
+
+
+
+{% comment %} </section> {% endcomment %}
+
+
+<section id="feed">
+  <div class="blog-single gray-bg">
+          <div class="container   ">
+          <div class="row  align-items-start  ">
+            <div class="col-lg-8 post_class2   m-15px-tb">
+
+        {% for post in object_list  %}
+           
+          <hr/>
+                <!-- content/post1 start-->
+                            <div class="row card_class  align-items-center  mb-5 ">
+                              <div class="col-lg-12"><a class="d-block post-trending mb-4" href="{% url 'user_feeds:articale-detail' post.pk %}">
+                                {% if post.image %} 
+                                <img class="img-fluid w-100" src="{{ post.image.url }}" alt=""/></a>
+                                {% endif %}
+                              </div>
+                      <div class="col-lg-12">
+                        <ul class="list-inline">
+                          <li class="list-inline-item mr-2"><a class="category-link font-weight-normal" href="#">{{post.category}} </a></li>
+                          <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="#">{{ post.author }}</a></li>
+                          <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="#">{{post.post_date|timesince}}</a></li>
+                        </ul>
+                        <h2 class="h3 post-title mb-4"> <a class="d-block reset-anchor" href="{% url 'user_feeds:articale-detail' post.pk %}">{{ post.title }}</a></h2>
+                        <ul class="list-inline">
+                          <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="#">Rating</a></li>
+                          <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="#">comment count</a></li>
+                        
+                        </ul>
+            
+                        <p class="text-muted post-content">{{ post.content|truncatechars:100 }}</p>
+                        <a class="btn btn-link p-0 read-more-btn" href="{% url 'user_feeds:articale-detail' post.pk %}"><span>Read more</span><i class="fas fa-long-arrow-alt-right"></i></a>
+            
+                      </div>
+                    </div>
+               
+                    <!-- content/post1 finish-->
+                  
+                  
+            
+        {% endfor %}
+
+             <!--################################################# Pagination#######$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+             ######################################################################-->
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                  </ul>
+                </nav>
+
+        </div>
+
+
+ 
+<div id="blog" class="col-lg-4 m-15px-tb blog-aside">
+ {% include 'user_feeds/sidebar.html' %}
+</div>
+
+
+ <div value="1" id="afterclickshow">
+<div class="header__toggle">
+ <i class='bx bx-x' id="header-toggle"></i>
+</div>
+     <div class=" m-15px-tb blog-aside1">
+        {% include 'user_feeds/sidebar.html' %}
+     </div>
+
+ </section>
+
+
+</section>
+
+  
+
+   <script>
+
+ /*===== button click show for mobile device  =====*/
+ document.getElementById('toggle_button').onclick=function(){
+   var toggle_div = document.getElementById('afterclickshow');
+   var icon_show_hide = document.getElementById('icon_show_hide');
+   if (toggle_div.value == "1"){
+   	toggle_div.style.display="none";
+   	toggle_div.value="0";
+ 	icon_show_hide.classList.remove('bxs-hide');
+ 	icon_show_hide.classList.add('bxs-show');
+   }
+   else{
+   	toggle_div.style.display="";
+   	toggle_div.value="1";
+ 	icon_show_hide.classList.remove('bxs-show');
+ 	icon_show_hide.classList.add('bxs-hide');
+   }
+ };
+
+ document.getElementById('header-toggle').onclick=function(){
+   var toggle_div = document.getElementById('afterclickshow');
+   if (toggle_div.value == "1"){
+   	toggle_div.style.display="none";
+   	toggle_div.value="0";
+   }
+   else{
+   	toggle_div.style.display="";
+   	toggle_div.value="1";
+   }
+ };
+
+ /*===== LINK ACTIVE  =====*/
+const linkColor = document.querySelectorAll('.nav__link')
+
+function colorLink(){
+  if(linkColor){
+      linkColor.forEach(l=> l.classList.remove('active'))
+      this.classList.add('active')
+  }
+}
+linkColor.forEach(l=> l.addEventListener('click', colorLink))
+
+
+ </script>
+ 
+{% endblock %}

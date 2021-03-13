@@ -1,0 +1,190 @@
+
+{%extends 'homepage/main.html' %}
+{% load static %}
+{% block content %}
+ 
+                  <!-- Author -->
+                <div class="widget widget-author">
+                  {% if request.user.is_authenticated %}
+                        <div class="widget-title">
+                            <h3>{{request.user.profile.full_name}}</h3>
+                        </div>
+                        <div class="widget-body">
+                            <div class="media align-items-center">
+                                <div class="avatar">
+                                    <img src="{{ user.profile.profile_picture.url }}" title="" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <h6>{{user.username}}</h6>
+                                </div>
+                            </div>
+                            <p>{{user.profile.bio}}</p>
+                        </div>
+                    {% else%}
+                          <div class="widget-body">
+                            <div class="media align-items-center">
+                                <div class="avatar">
+                                    <img src="#" title="" alt="">
+                                </div>
+                                <div class="media-body">
+                                   <a href="{% url 'profiles:signup' %}"> <h6>Signup</h6></a>
+                                </div>
+                            </div>
+                            <p>Join our amazing coummity.Learn and teach together for growup quick.</p>
+                        </div>
+                    {% endif %}
+
+                </div>
+                <!-- End Author -->
+
+
+                  <!-- Trending Post -->
+                  <div class="widget widget-post">
+                      <div class="widget-title">
+                          <h3>Trending Now</h3>
+                      </div>
+                      <div class="widget-body">
+
+                         <!-- start content1-->
+                        <div class="latest-post-aside media">
+                            <div class="lpa-left media-body">
+                                <div class="lpa-title">
+                                    <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
+                                </div>
+                                <div class="lpa-meta">
+                                    <a class="name" href="#">
+                                        Rachel Roth
+                                    </a>
+                                    <a class="date" href="#">
+                                        26 FEB 2020
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="lpa-right">
+                                <a href="#">
+                                    <img src="{% static 'images/aa.jpg' %}" title="" alt="">
+                                </a>
+                            </div>
+                        </div>
+
+                      <!-- finish content1-->
+
+                      <!-- start content1-->
+                     <div class="latest-post-aside media">
+                         <div class="lpa-left media-body">
+                             <div class="lpa-title">
+                                 <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
+                             </div>
+                             <div class="lpa-meta">
+                                 <a class="name" href="#">
+                                     Rachel Roth
+                                 </a>
+                                 <a class="date" href="#">
+                                     26 FEB 2020
+                                 </a>
+                             </div>
+                         </div>
+                         <div class="lpa-right">
+                             <a href="#">
+                                 <img src="images/aa.jpg" title="" alt="">
+                             </a>
+                         </div>
+                     </div>
+
+                   <!-- finish content1-->
+
+                      </div>
+                  </div>
+                  <!-- End Trending Post -->
+
+                 <!-- Discasion seaction -->
+                 <div class="widget widget-post">
+                     <div class="widget-title">
+                         <h3>Help others to grow with you</h3>
+                     </div>
+                     <div class="widget-body">
+
+                        <!-- start content1-->
+                       <div class="latest-post-aside media">
+                           <div class="lpa-left media-body">
+                               <div class="lpa-title">
+                                   <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
+                               </div>
+                               <div class="lpa-meta">
+
+                                   <a class="date" href="#">
+                                       26 FEB 2020
+                                   </a>
+                               </div>
+                           </div>
+
+                       </div>
+
+                     <!-- finish content1-->
+
+                     </div>
+                 </div>
+
+
+
+
+                 <!-- Latest Post -->
+               <div class="widget widget-latest-post">
+                <div class="widget-title">
+                    <h3>Latest Post</h3>
+                </div>
+                <div class="widget-body">
+
+                    {% for post in latest %}
+                    <div class="latest-post-aside media">
+                        <div class="lpa-left media-body">
+                            <div class="lpa-title">
+                                <h5><a href="#">{{post.title}}</a></h5>
+                            </div>
+                            <div class="lpa-meta">
+                                <a class="name" href="{{ post.get_absolute_url }}">
+                                    {{ post.author}}
+                                </a>
+                                <a class="date" href="#">
+                                    {{post.post_date|timesince}}
+                                </a>
+                            </div>
+                        </div>
+                        {% comment %} <div class="lpa-right">
+                            <a href="#">
+                                <img src="{{post.image.url }}" title="" alt="">
+                            </a>
+                        </div>  {% endcomment %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                   
+                </div>
+                  <!-- widget Tags -->
+                  <div class="widget widget-tags">
+                      <div class="widget-title">
+                          <h3>Latest Tags</h3>
+                      </div>
+                      <div class="widget-body">
+                          <div class="nav tag-cloud">
+                              <a href="#">Design</a>
+                              <a href="#">Development</a>
+                              <a href="#">Travel</a>
+                              <a href="#">Web Design</a>
+                              <a href="#">Marketing</a>
+                              <a href="#">Research</a>
+                              <a href="#">Managment</a>
+                          </div>
+
+
+                      </div>
+                  </div>
+                  <!-- End widget Tags -->
+              </div>
+          </div>
+      </div>
+ 
+
+  
+{% endblock %}

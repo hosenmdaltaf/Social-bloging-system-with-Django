@@ -1,0 +1,69 @@
+{% extends 'homepage/main.html' %}
+{% load static %}
+
+
+{% include 'homepage/navbar.html' %}
+
+{% block content %}
+
+{% include 'homepage/navbar.html' %}
+
+<!--Hero seaction------------------------------------------------------------------------------------->
+<section class="hero is-medium is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          A Hosen MD Altaf Blog
+        </h1>
+        <h2 class="subtitle">
+          Tech,Food,Travel
+        </h2>
+      </div>
+   
+    </div>
+  </section>
+
+ 
+  <div class="alert alert-primary col-md-6 offset-md-3" role="alert">
+    Welcome,{{ request.user}}
+  </div>
+ 
+<!--Card seaction--------------------------------------- #blog.author---------------------------------------------->
+
+
+
+   <h1>Latest post</h1>
+   <div class="container card-seaction ">
+    <div class="row">
+   
+        <div class="col-md-4">
+            <div class="card p-3 card-type">
+                <div class="d-flex flex-row mb-3">
+
+                  <div class="avatar">
+                  <img  src="#" > 
+                  
+                </div>
+                    <div class="d-flex flex-column ml-2"><span>Altaf</span><span class="text-black-50">12.1</span>
+                    <span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i></span></div>
+                </div>
+                <h6>Tech and travle is my fashion</h6>
+                
+                <div class="d-flex justify-content-between install mt-3"><span>Total views 0 times</span>
+                <a href="#" ><span class="is-primary">Read More&nbsp;<i class="fa fa-angle-right"></i></span></a></div>
+            </div>
+        </div>
+
+     </div>
+  </div>
+  <!--Footer seaction------------------------------------------------------------------------------------->
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>A blog with django </strong> by <a href="https://altafhosen.com">Hosen MD Altaf</a>.
+      </p>
+    </div>
+  </footer>
+{% endblock %}

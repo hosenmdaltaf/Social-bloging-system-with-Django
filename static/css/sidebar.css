@@ -1,0 +1,116 @@
+body{margin-top:20px;
+  text-decoration: none;
+}
+/* Blog Sidebar
+-------------------*/
+.blog-aside .widget {
+
+    box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
+     border-radius: 5px;
+     overflow: hidden;
+  
+     background-color: #e7ebef;
+     margin-top: 15px;
+     margin-bottom: 15px;
+     width: 100%;
+     display: inline-block;
+     vertical-align: top;
+  
+  }
+  .blog-aside .widget-body {
+    padding: 15px;
+  }
+  .blog-aside .widget-title {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  .blog-aside .widget-title h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fc5356;
+    margin: 0;
+  }
+  .blog-aside .widget-author .media {
+    margin-bottom: 15px;
+  }
+  .blog-aside .widget-author p {
+    font-size: 16px;
+    margin: 0;
+  }
+  .blog-aside .widget-author .avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .blog-aside .widget-author h6 {
+    font-weight: 600;
+    color: #20247b;
+    font-size: 22px;
+    margin: 0;
+    padding-left: 20px;
+  }
+  .blog-aside .post-aside {
+    margin-bottom: 15px;
+  }
+  .blog-aside .post-aside .post-aside-title h5 {
+    margin: 0;
+  }
+  .blog-aside .post-aside .post-aside-title a {
+    font-size: 18px;
+    color: #20247b;
+    font-weight: 600;
+  }
+  .blog-aside .post-aside .post-aside-meta {
+    padding-bottom: 10px;
+  }
+  .blog-aside .post-aside .post-aside-meta a {
+    color: #6F8BA4;
+    font-size: 12px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .blog-aside .latest-post-aside + .latest-post-aside {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    margin-top: 15px;
+  }
+  .blog-aside .latest-post-aside .lpa-right {
+    width: 90px;
+  }
+  .blog-aside .latest-post-aside .lpa-right img {
+    border-radius: 3px;
+  }
+  .blog-aside .latest-post-aside .lpa-left {
+    padding-right: 15px;
+  }
+  .blog-aside .latest-post-aside .lpa-title h5 {
+    margin: 0;
+    font-size: 15px;
+  }
+  .blog-aside .latest-post-aside .lpa-title a {
+    color: #20247b;
+    font-weight: 600;
+  }
+  .blog-aside .latest-post-aside .lpa-meta a {
+    color: #6F8BA4;
+    font-size: 12px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .tag-cloud a {
+    padding: 4px 15px;
+    font-size: 13px;
+    color: #ffffff;
+    background: #20247b;
+    border-radius: 3px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+  }
+  .tag-cloud a:hover {
+    background: #fc5356;
+  }
+  

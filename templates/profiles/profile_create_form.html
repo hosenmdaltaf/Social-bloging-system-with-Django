@@ -1,0 +1,28 @@
+
+{% extends 'homepage/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% include 'homepage/navbar.html' %}
+
+    <h1  style="text-align: center; background-color: rgb(233, 236, 239);">Create Your profile</h1>   
+
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %}
+    {% comment %} {% if user.id == profile.user.id %} {% endcomment %}
+
+        <form  method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                {{ form|crispy }}
+                </div>  
+            </div>
+            <input class="btn btn-success col-md-6 offset-md-3" type="submit" value="Create">
+        </form>
+    
+    {% comment %} {% endif %} {% endcomment %}
+{% endif %}
+
+{% endblock%} 

@@ -1,0 +1,103 @@
+{%extends 'homepage/main.html' %}
+{% load static %}
+{% block content %}
+  
+      {% include 'homepage/navbar.html' %}
+
+    <div class="blog-single gray-bg">
+      <div class="container">
+          <div class="row align-items-start">
+              <div class="col-lg-8 m-15px-tb">
+                  <article class="article">
+                      <div class="article-img">
+                     {% if details.image %}
+                        <img src=" {{ details.image.url }} " title="" alt="">
+                     {% endif %}
+                      </div>
+                      <div class="article-title">
+                          <h6><a href="#">{{details.category}}</a></h6>
+                          <h2>{{details.title}}</h2>
+                          <div class="media">
+                               
+                           <ul class="list-inline">
+                           <img src=" {{ details.post.author.image.url }} " title="" alt="">
+                          <li class="list-inline-item mr-2"><a class="category-link font-weight-normal" href="#">{{ details.author }}</a></li>
+                          <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="#"> {{details.post_date|timesince}}</a></li>
+                          <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="#">Rating</a></li>
+                          </ul>
+               
+                          </div>
+                      </div>
+                      <div class="article-content">
+                          <p>{{details.content }}</p>
+
+                      </div>
+                      <div class="nav tag-cloud">
+                          
+                        {% if request.user.is_authenticated %}   
+                            {% if user.id == post.author.id %}
+                                  <a href="{% url 'user_feeds:post-update' details.id %}">Update post</a>
+                                  <a href="{% url 'user_feeds:post-delete' details.id %}">Delete post</a>    
+                            {% endif %}
+                        {% endif %}
+
+                      </div>
+                  </article>
+                  {% comment %} <!-- this seaction is for comment showcase----------------------------------- --> {% endcomment %}
+                  
+ <div class="card">
+  <div class="card-content">
+    <div class="content">
+      <h2>Comments: {{ comments.count }}</h2>
+    </div>
+  </div>
+</div>
+<article class="media"></article>
+{% for comment in comments %}
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img src="https://bulma.io/images/placeholders/128x128.png">
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong>{{ profile.comment.full_name }}</strong> <small>@{{ profile.comment.created_by }}</small> <small>{{ comment.created_date|timesince }}</small>
+        <br>
+        {{ comment.text|linebreaks }}
+      </p>
+    </div>
+
+</article>
+{% empty %}
+        <p>No comments here yet :</p>
+{% endfor  %}
+                 
+
+                  <div class="contact-form article-comment">
+                      <h4>Leave a Reply</h4>
+                      <form id="contact-form" method="POST">
+                          {% csrf_token  %}
+                          <div class="row">
+                             
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <textarea name="text" id="message" placeholder="Your message *" rows="4" class="form-control"></textarea>
+                                  </div>
+                              </div>
+                              <div class="col-md-12">
+                                  <div class="send">
+                                      <button class="px-btn theme" type="submit"><span>Submit</span> <i class="arrow"></i></button>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+  <div class="col-lg-4 m-15px-tb blog-aside">
+            {% include 'user_feeds/sidebar.html' %}
+   </div>
+             
+
+{% endblock %}

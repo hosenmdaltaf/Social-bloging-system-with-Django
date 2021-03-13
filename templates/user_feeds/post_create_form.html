@@ -1,0 +1,25 @@
+
+{% extends 'homepage/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% include 'homepage/navbar.html' %}
+
+    <h1  style="text-align: center; background-color: rgb(233, 236, 239);">Post A New Blog</h1>   
+
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %}
+    <form  method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+            {{ form|crispy }}
+            </div>  
+        </div>
+        <input class="btn btn-success col-md-6 offset-md-3" type="submit" value="Post">
+    </form>
+    
+{% endif %}
+
+{% endblock%} 
