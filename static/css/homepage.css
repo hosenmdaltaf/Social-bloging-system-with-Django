@@ -209,3 +209,39 @@ h4{
     font-size: 13px;
   }
 }
+
+
+blog page css------------------------------------------------------------------------------ */
+
+/* body {
+  background: #eee
+} */
+
+.ratings i {
+  color: green;
+}
+
+.install span {
+  font-size: 12px;
+}
+
+.col-md-4 {
+  /* margin-top: 27px; */
+}
+.card-seaction{
+  padding-bottom: 50px;
+  background: #eee;
+}
+.pg-button{
+  margin-top:20%;
+}
+.card-type{
+  transition:transform 1s;
+ 
+}
+.card-type:hover{
+  transform: scale(1.05);
+}
+.card{
+  margin: 5%;
+}

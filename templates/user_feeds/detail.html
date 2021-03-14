@@ -63,7 +63,7 @@
   <div class="media-content">
     <div class="content">
       <p>
-        <strong>{{ profile.comment.full_name }}</strong> <small>@{{ profile.comment.created_by }}</small> <small>{{ comment.created_date|timesince }}</small>
+        <strong>{{ comment.profile.username }}</strong> <small>@{{comment.created_by }}</small> <small>{{ comment.created_date|timesince }}</small>
         <br>
         {{ comment.text|linebreaks }}
       </p>
