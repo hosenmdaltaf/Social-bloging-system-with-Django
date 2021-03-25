@@ -34,11 +34,12 @@ class ProfileCreateView(CreateView):
     success_url = reverse_lazy("profiles:profile_create")
 
     def form_valid(self,form):
-        # form.instance.user = profile.request.user
-        form.instance.user.id == profile.user.id
+        form.instance.author =self.request.user
         return super().form_valid(form)
 
+ 
 
+ 
 
 #post Update page view
 class ProfileUpdateView(UpdateView):

@@ -9,7 +9,7 @@ from profiles.models import Profile
 
 class Post(models.Model):
     title = models.CharField(max_length=200,null=True,blank=True)
-    author = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True)  #settings.AUTH_USER_MODEL
+    author = models.ForeignKey(User, on_delete=models.CASCADE,null=True)  #settings.AUTH_USER_MODEL
     content = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
     post_updated = models.DateField(auto_now=True)

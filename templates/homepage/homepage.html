@@ -32,53 +32,74 @@
 
 
 <div class="secondnavbar">
-    <h2>Latest</h2>
+  <a href="{% url 'homepage:article-list' %}">
+      <h2 >All</h2> </a>
+
+
+      <h2 >Latest</h2> 
+
     <h2>Toprated</h2>
     <h2>Trending</h2>
-    {% for cat in allposts %}
- 
-        <h2>{{cat.category}}</h2>
+
+
+    {% for cat in categories %}
+   <a href="{% url 'homepage:article-list' %}?category={{cat.name}}">
+        <h2>{{cat.name}}</h2>
+    </a>
 
     {% endfor %}
    
    
-  </div>
+  </div> 
 
-
-
-   <h1>Latest post</h1>
-  
 
 
 <div class="container card-seaction ">
         <div class="row">
 
-        {% for post in allpostinhome%}
+        {% for post in allpostinhome%} 
+        
             <div class="col-md-4">
                 <div class="card p-3 m-2 card-type">
-                    <div class="d-flex flex-row mb-3"><img src="{{ post.author.profile_picture.url }}" width="70">
-                        <div class="d-flex flex-column ml-2"><span>{{ post.author }}</span><span class="text-black-50">{{post.post_date|timesince}}</span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
+                
+                    <div class="d-flex flex-row mb-3"><img src="{{ post.author.profile.profile_picture.url }}" width="70">
+                        <div class="d-flex flex-column ml-2"><span>@{{ post.author }}</span><span class="text-black-50">{{post.post_date|timesince}}</span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
                     </div>
+                  <a href='{% url 'user_feeds:articale-detail' post.pk %}'>
                     <h6>{{ post.title }}</h6>
-                    <div class="d-flex justify-content-between install mt-3"><span>#{{post.category}}</span><span class="is-primary">View&nbsp;<i class="fa fa-angle-right"></i></span></div>
+                    <div class="d-flex justify-content-between install mt-3"><span>#{{post.category}}</span>
+                    <a href='{% url 'user_feeds:articale-detail' post.pk %}'>
+                     <span class="is-primary">View&nbsp;<i class="fa fa-angle-right"></i></span>
+                    </a>
+                    </div>
+                 </a>
                 </div>
             </div>
+         
            
-        {% endfor %}
-
-
-
-                
-          
-           
+        {% endfor %}  
         
         </div>
     </div>
 
+{% comment %} <!--Pagination seaction---------------------------------------------------------------------> {% endcomment %}
 
+
+{% if is_paginated %}
+    <nav class="pagination is-centered pg-button" role="navigation" aria-label="pagination">
+     <ul class="pagination-list">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="pagination-previous">Previous</a>
+        {% endif %}
+        {% if page_obj.has_next %}
+           <a href="?page={{ page_obj.next_page_number }}" class="pagination-next">Next page</a>
+        {% endif %}
+     </ul>
+    </nav>
+{% endif %}
 
 {% comment %} 
-  <!--Footer seaction-------------------------------------------------------------------------------------> {% endcomment %}
+  <!--Footer seaction-------------------------------------------------------------------------->  {% endcomment %}
  
  <footer class="footer">
     <div class="content has-text-centered">
@@ -89,3 +110,7 @@
   </footer> 
 
 {% endblock %}
+
+
+
+  

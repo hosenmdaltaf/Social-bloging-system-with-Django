@@ -34,6 +34,12 @@ class PostCreateView(CreateView):
     template_name='user_feeds/post_create_form.html'
     success_url = reverse_lazy("user_feeds:profile-page")
 
+  
+    # def form_valid(self,form):
+    #     # form.instance.user = profile.request.user
+    #     form.instance.user.id ==  self.profile.user.id
+    #     return super().form_valid(form)
+
     def form_valid(self,form):
         form.instance.author =self.request.user
         return super().form_valid(form)
@@ -72,7 +78,7 @@ def postdetail(request,id):
             comments_form = CommentForm() 
 
     comments=Comment.objects.filter(post=post)
-    return render(request,'user_feeds/detail.html',{'details':details,'comments':comments})
+    return render(request,'user_feeds/detail.html',{'details':details,'comments':comments,'latest':latest})
 
 #  ,'comments':comments
 

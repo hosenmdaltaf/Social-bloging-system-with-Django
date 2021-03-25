@@ -119,12 +119,12 @@
 
           <div id="toggle_button" class="action-icon-one">
 		  <i id="icon_show_hide" class='bx bxs-show'></i></div>
-          <div class="action-icon-two"><img src="{{ request.user.profile_image.url }}"></div>
+          <div class="action-icon-two"><img src="{{ user.profile.profile_picture.url }}"></div>
         </div>
       </section>
 
 
-      <div class="secondnavbar">
+    {% comment %} <div class="secondnavbar">
     <h2>Latest</h2>
     <h2>Toprated</h2>
     <h2>Trending</h2>
@@ -135,7 +135,7 @@
     {% endfor %}
    
    
-  </div>
+  </div> {% endcomment %}
 
 
 
