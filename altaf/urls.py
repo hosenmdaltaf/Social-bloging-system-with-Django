@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('homepage.urls')),
     path('profiles/', include('profiles.urls')),
     path('user_feeds/', include('user_feeds.urls')),
+    path('discussion_forum/', include('Forum.urls')),
 ]
 
 if settings.DEBUG:

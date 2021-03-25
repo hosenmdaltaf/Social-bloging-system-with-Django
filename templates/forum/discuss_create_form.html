@@ -1,0 +1,29 @@
+
+{% extends 'homepage/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+{% include 'homepage/navbar.html' %}
+
+    <h1  style="text-align: center; background-color: rgb(233, 236, 239);">Ask what you don't know </h1>   
+
+{% load crispy_forms_tags %}
+
+{% comment %} {% if user.is_authenticated %} {% endcomment %}
+    <form  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+            {{ form|crispy }}
+          <p class="control">
+          <input class="button" type="text"  name='category_new'>
+         </p>
+            </div>  
+        </div>
+        <input class="btn btn-success col-md-6 offset-md-3" type="submit" value="Post">
+    </form>
+    
+{% comment %} {% endif %} {% endcomment %}
+
+{% endblock%} 
