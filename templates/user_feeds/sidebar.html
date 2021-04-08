@@ -103,23 +103,26 @@
                          <h3>Help others to grow with you</h3>
                      </div>
                      <div class="widget-body">
-
+                   
+                   {% for question in latets_forum_question %}
                         <!-- start content1-->
                        <div class="latest-post-aside media">
                            <div class="lpa-left media-body">
                                <div class="lpa-title">
-                                   <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
+                                   <h5><a href="{% url 'Forum:articale-detail' question.id %}">{{ question.title }}</a></h5>
                                </div>
                                <div class="lpa-meta">
-
-                                   <a class="date" href="#">
-                                       26 FEB 2020
-                                   </a>
-                               </div>
+                                <a class="name" href="#">
+                                    {{ question.creator}}
+                                </a>
+                                <a class="date" href="#">
+                                    {{question.qustion_date|timesince}}
+                                </a>
+                            </div>
                            </div>
 
                        </div>
-
+                    {% endfor %}
                      <!-- finish content1-->
 
                      </div>
@@ -139,10 +142,10 @@
                     <div class="latest-post-aside media">
                         <div class="lpa-left media-body">
                             <div class="lpa-title">
-                                <h5><a href="#">{{post.title}}</a></h5>
+                                <h5><a href="{% url 'user_feeds:articale-detail' post.pk %}">{{post.title}}</a></h5>
                             </div>
                             <div class="lpa-meta">
-                                <a class="name" href="{{ post.get_absolute_url }}">
+                                <a class="name" href="#">
                                     {{ post.author}}
                                 </a>
                                 <a class="date" href="#">

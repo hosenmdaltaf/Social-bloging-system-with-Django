@@ -72,7 +72,17 @@
         </div>
           </a>
 
-    <a href="{% url 'profiles:profile_update' user.profile.id  %}" class="nav__link">
+   <a href="{% url 'profiles:all_profile'   %}" class="nav__link">
+    {% comment %} {% url 'account:edit'  user.id %} {% endcomment %}
+       <div class="links">
+          <div class="icon">
+          <i class='bx bxs-wrench'></i>
+          </div>
+          <span>Profile list</span>
+        </div> 
+          </a>   
+
+       <a href="{% url 'profiles:profile_update' user.profile.id  %}" class="nav__link">
     {% comment %} {% url 'account:edit'  user.id %} {% endcomment %}
         <div class="links">
           <div class="icon">
@@ -82,7 +92,7 @@
         </div>
           </a> 
 
-        <a href="{% url 'profiles:my_profile' %}" class="nav__link">
+        <a href="{% url 'profiles:my_profile' user.profile.pk  %}" class="nav__link">
         <div class="links">
           <div class="icon">
               <i class='bx bxs-user'></i>
@@ -109,10 +119,14 @@
 
     <section id="main-dashboard-content">
       <section id="top-section">
+
+      <form method="GET" >
         <div class="input-box">
-          <input placeholder="Search..." />
+          <input placeholder="Search..." type="text" name='search-area' value="{{search_input}}" />
           <div>
-            <i class='bx bx-search-alt-2'></i>
+            <i class='bx bx-search-alt-2'type="submit" value='Search'></i>
+
+      </form>
           </div>
         </div>
         <div class="action-icons">
@@ -148,20 +162,22 @@
           <div class="row  align-items-start  ">
             <div class="col-lg-8 post_class2   m-15px-tb">
 
-        {% for post in object_list  %}
-           
+        {% for post in allposts  %}
+ 
           <hr/>
                 <!-- content/post1 start-->
-                            <div class="row card_class  align-items-center  mb-5 ">
+                    <div class="row card_class  align-items-center  mb-5 ">
                               <div class="col-lg-12"><a class="d-block post-trending mb-4" href="{% url 'user_feeds:articale-detail' post.pk %}">
                                 {% if post.image %} 
                                 <img class="img-fluid w-100" src="{{ post.image.url }}" alt=""/></a>
                                 {% endif %}
                               </div>
+                              {% comment %} post.author.get_absolute_url {% endcomment %}
+          
                       <div class="col-lg-12">
                         <ul class="list-inline">
-                          <li class="list-inline-item mr-2"><a class="category-link font-weight-normal" href="#">{{post.category}} </a></li>
-                          <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="#">{{ post.author }}</a></li>
+                          <li class="list-inline-item mr-2"><a class="category-link font-weight-normal" href="#">{{post.category}} </a></li>    
+                          <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="{% url 'profiles:my_profile' post.author.pk  %}">{{ post.author }}</a></li>
                           <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="#">{{post.post_date|timesince}}</a></li>
                         </ul>
                         <h2 class="h3 post-title mb-4"> <a class="d-block reset-anchor" href="{% url 'user_feeds:articale-detail' post.pk %}">{{ post.title }}</a></h2>
@@ -172,10 +188,11 @@
                         </ul>
             
                         <p class="text-muted post-content">{{ post.content|truncatechars:100 }}</p>
-                        <a class="btn btn-link p-0 read-more-btn" href="{% url 'user_feeds:articale-detail' post.pk %}"><span>Read more</span><i class="fas fa-long-arrow-alt-right"></i></a>
+                      <a class="btn btn-link p-0 read-more-btn" href="{% url 'user_feeds:articale-detail' post.pk %}">
+                        <span>Read more</span><i class="fas fa-long-arrow-alt-right"></i></a>
             
                       </div>
-                    </div>
+                    </div>  
                
                     <!-- content/post1 finish-->
                   

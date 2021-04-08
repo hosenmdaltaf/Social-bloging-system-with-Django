@@ -1,30 +1,50 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm     #UserCreationForm,
 from django.contrib.auth import login,logout
 from django.contrib import messages
 from .forms import UserRegisterForm
 from profiles.models import Profile
 from django.contrib.auth.models import User
-# from django.shortcuts import render,get_object_or_404,redirect
+from django.http import Http404
 from django.urls import reverse_lazy
 from django.views.generic import (
-#     #  DetailView,
+      DetailView,
       CreateView,
       UpdateView,
-#      ListView,
-     DeleteView
+      ListView,
+      DeleteView
 )
 
-# class My_profileView(ListView):
-#     model = Profile
-#     # paginate_by = 10
-#     context_object_name = 'profiles'
-#     template_name='profiles/user_profile_page.html'
+from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-#     # def get_context_data(self,*args,**kwargs):
-#     #     context = super().get_context_data(*args,**kwargs)
-#     #     context['latest']= Post.objects.order_by('-post_date')[:5]
-#     #     return context
+
+def follow_and_unfolow(request):
+    if request.method =='POST':
+        my_profile = Profile.objects.get(user=request.user)
+        pk= request.POST.get('profile_pk')
+        obj= Profile.objects.get(pk=pk)
+
+        if obj.user in my_profile.following.all():
+            my_profile.following.remove(obj.user)
+        else:
+            my_profile.following.add(obj.user)
+        return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('profiles:all_profile')
+    
+
+
+class Profile_list_View(ListView):
+    model = Profile
+    # paginate_by = 3
+    context_object_name = 'profiles_list'
+    template_name='profiles/profile_list.html'
+
+    def get_queryset(self):
+        return Profile.objects.all().exclude(user=self.request.user)
+
+    
 
 #post Create page view
 class ProfileCreateView(CreateView):
@@ -37,9 +57,27 @@ class ProfileCreateView(CreateView):
         form.instance.author =self.request.user
         return super().form_valid(form)
 
- 
 
- 
+class ProfileDetailView(DetailView):
+    model = Profile
+    context_object_name = 'profiles'
+    template_name = 'profiles/user_profile_page.html' 
+
+    def get_object(self,**kwargs):
+        pk= self.kwargs.get('pk')
+        view_profile = Profile.objects.get(pk=pk)
+        return view_profile
+
+    def get_context_data(self,*args,**kwargs):
+        context = super().get_context_data(*args,**kwargs)
+        view_profile = self.get_object()
+        my_profile = Profile.objects.get(user=self.request.user)
+        if view_profile.user in my_profile.following.all():
+            follow=True
+        else:
+            follow= False
+        context['follow'] = follow 
+        return context
 
 #post Update page view
 class ProfileUpdateView(UpdateView):
@@ -63,10 +101,13 @@ class ProfileDeleteView(DeleteView):
 
 
 
-def my_profile(request):
-    # profiles =Profile.objects.all()
-    profiles= Profile.objects.get(user=request.user)
-    return render(request,'profiles/user_profile_page.html',{'profiles':profiles})
+# def profiles_detail(request,id): 
+    
+#     profiles=Profile.objects.get(id=id)
+#     # profiles = get_object_or_404(Profile, id=id)
+#     # profiles= Profile.objects.get(user=request.user)
+#     return render(request,'profiles/user_profile_page.html',{'profiles':profiles})
+
 
 
 

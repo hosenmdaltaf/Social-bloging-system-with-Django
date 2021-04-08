@@ -14,18 +14,51 @@ from .forms import CommentForm
 from profiles.models import Profile
 from user_feeds.models import Post
 from user_feeds.models import Comment
+from Forum.models import Discussion
+from itertools import chain
 
 
-class UserFeedpageListView(ListView):
-    model = Post
-    # paginate_by = 10
-    context_object_name = 'allposts'
-    template_name='user_feeds/my_feed.html'
+# def sidebar(request):
+#     latest = Post.objects.order_by('-post_date')[:5]
+#     latets_forum_question = Discussion.objects.order_by('-qustion_date')[:3]
+#     return render(request,'user_feeds/sidebar.html',
+#     {'latest':latest,'latets_forum_question':latets_forum_question})
 
-    def get_context_data(self,*args,**kwargs):
-        context = super().get_context_data(*args,**kwargs)
-        context['latest']= Post.objects.order_by('-post_date')[:5]
-        return context
+
+def userFeedpage(request):
+    latest= Post.objects.order_by('-post_date')[:5]
+    latets_forum_question = Discussion.objects.order_by('-qustion_date')[:3]
+
+    allposts =Post.objects.all()
+    
+    # search_input = request.GET.get('search-area') or ''
+    # allprofile = Profile.objects.all()
+    # if search_input:
+    #     allprofile = allprofile.filter(user__startswith=search_input)
+
+    # search_input = search_input
+   
+#    #get logged in user profile
+#     profile = Profile.objects.get(user=request.user)
+#     #check who we are following
+#     users = [user for user in profile.following.all()]
+#     #initial values for variables
+#     allposts=[]
+#     qs = None
+#     #get posts from who we are following
+#     for u in users:
+#         p = Profile.objects.get(user=u)
+#         p_post = p.post_set.all()
+#         allposts.append(p_post)
+    # #our won post
+    # my_post = profile.profiles_posts()
+    # posts.append(my_post)
+    # #sort and chain queryset by latest
+    # if len(post)
+
+    
+    return render(request,'user_feeds/my_feed.html',{'allposts':allposts,
+    'latest':latest,'latets_forum_question':latets_forum_question })
 
 #post Create page view
 class PostCreateView(CreateView):
@@ -35,15 +68,12 @@ class PostCreateView(CreateView):
     success_url = reverse_lazy("user_feeds:profile-page")
 
   
-    # def form_valid(self,form):
-    #     # form.instance.user = profile.request.user
-    #     form.instance.user.id ==  self.profile.user.id
-    #     return super().form_valid(form)
-
     def form_valid(self,form):
-        form.instance.author =self.request.user
+        # # form.instance.author =self.request.user
+        form.instance.author =self.request.user.profile
         return super().form_valid(form)
 
+   
 # #Detailpage view
 # class PostDetailView(DetailView):
 #     model=Post
@@ -59,17 +89,18 @@ class PostCreateView(CreateView):
 #          return Post.objects.all()
 
 
-def postdetail(request,id):
+def postdetail(request,id): 
     details=Post.objects.get(id=id)
     post = get_object_or_404(Post, id=id)
     latest= Post.objects.order_by('-post_date')[:5]
+    latets_forum_question = Discussion.objects.order_by('-qustion_date')[:3]
    
-    comments_form = CommentForm()  
+    comments_form = CommentForm()   
 
     if request.method == 'POST': 
-        comments_form = CommentForm(request.POST ) 
+        comments_form = CommentForm(request.POST )  
         if comments_form.is_valid(): 
-            # comments_form.instance.created_by = profile.request.user
+            comments_form.instance.created_by = request.user.profile
             comment = comments_form.save(commit=False)
             comment.post = details
             comments_form.save() 
@@ -78,7 +109,8 @@ def postdetail(request,id):
             comments_form = CommentForm() 
 
     comments=Comment.objects.filter(post=post)
-    return render(request,'user_feeds/detail.html',{'details':details,'comments':comments,'latest':latest})
+    return render(request,'user_feeds/detail.html',{'details':details,
+    'comments':comments,'latest':latest,'latets_forum_question':latets_forum_question })
 
 #  ,'comments':comments
 

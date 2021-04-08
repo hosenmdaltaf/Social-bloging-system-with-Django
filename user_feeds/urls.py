@@ -1,7 +1,7 @@
 from django.urls import path
 from .import views
 from .views import(
-    UserFeedpageListView,
+    # UserFeedpageListView,
     # PostDetailView,
     PostCreateView, 
     PostUpdateView,
@@ -11,7 +11,9 @@ from .views import(
 app_name='user_feeds'
 
 urlpatterns = [
-    path('', UserFeedpageListView.as_view(), name='profile-page'),
+    path('',views.userFeedpage,name='profile-page'),
+    # path('',views.sidebar,name='sidebar-page'),
+    # path('', UserFeedpageListView.as_view(), name='profile-page'),
     path('post/<int:id>',views.postdetail,name='articale-detail'),
     path('post/new',PostCreateView.as_view(),name='post-create'), 
     path('post/<int:pk>/update/', PostUpdateView.as_view(),name='post-update'),

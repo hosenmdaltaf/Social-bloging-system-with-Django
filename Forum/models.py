@@ -2,12 +2,13 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth.models import User
+from profiles.models import Profile
 
     
 
-class Discussion(models.Model):
+class Discussion(models.Model): 
     title = models.CharField(max_length=200,null=True,blank=True)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE,null=True)  #settings.AUTH_USER_MODEL
+    creator = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True)  #settings.AUTH_USER_MODEL
     qustion = models.TextField()
     qustion_date = models.DateTimeField(auto_now_add=True)
     qustion_updated = models.DateField(auto_now=True)
@@ -37,7 +38,7 @@ class Category(models.Model):
 
 class Answer(models.Model):
     post = models.ForeignKey('Discussion', on_delete=models.CASCADE, related_name='discussion')
-    created_by = models.ForeignKey(User,on_delete=models.CASCADE,blank=True, null=True)          
+    created_by = models.ForeignKey(Profile,on_delete=models.CASCADE,blank=True, null=True)          
     text = models.TextField(blank=True, null=True )
     created_date = models.DateTimeField(auto_now_add=True)
     approved_comment = models.BooleanField(default=False)

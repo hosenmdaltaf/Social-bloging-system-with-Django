@@ -9,7 +9,7 @@ from profiles.models import Profile
 
 class Post(models.Model):
     title = models.CharField(max_length=200,null=True,blank=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE,null=True)  #settings.AUTH_USER_MODEL
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True)  #settings.AUTH_USER_MODEL
     content = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
     post_updated = models.DateField(auto_now=True)
@@ -32,10 +32,13 @@ class Post(models.Model):
     class Meta:
         ordering = ['-post_date']
 
+    def num_comments(self):
+        return self.comment_set.all().count()
+
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200,null=True,blank=True)
    
     def __str__(self):
         return self.name

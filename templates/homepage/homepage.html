@@ -62,7 +62,7 @@
             <div class="col-md-4">
                 <div class="card p-3 m-2 card-type">
                 
-                    <div class="d-flex flex-row mb-3"><img src="{{ post.author.profile.profile_picture.url }}" width="70">
+                    <div class="d-flex flex-row mb-3"><img src="{{ post.author.profile_picture.url }}" width="70">
                         <div class="d-flex flex-column ml-2"><span>@{{ post.author }}</span><span class="text-black-50">{{post.post_date|timesince}}</span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
                     </div>
                   <a href='{% url 'user_feeds:articale-detail' post.pk %}'>

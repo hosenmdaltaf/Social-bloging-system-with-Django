@@ -77,13 +77,13 @@
       <article class="media">
         <figure class="media-left">
           <p class="image is-64x64">
-            <img src="{{ discuss.creator.profile_picture.url}}">
+            <img src="{{ discuss.creator.profile_picture.url }}">
           </p>
         </figure>
         <div class="media-content">
           <div class="content">
             <p>
-              <small>@{{discuss.creator}}</small> <small>{{discuss.qustion_date}}</small>
+              <small>@{{discuss.creator}}</small> <small>{{discuss.qustion_date}}</small> 
               <br><a href='{% url 'Forum:articale-detail' discuss.id %}'>
               <strong>{{discuss.title }}</strong> </a>
             </p>
