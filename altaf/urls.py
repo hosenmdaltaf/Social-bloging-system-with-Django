@@ -11,7 +11,7 @@ urlpatterns = [
     path('user_feeds/', include('user_feeds.urls')),
     path('discussion_forum/', include('Forum.urls')),
 
-    path('messages/', include('chat.urls')),
+    path('messages/', include('core.urls')),
   
 ]
 

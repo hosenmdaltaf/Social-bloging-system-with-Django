@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'user_feeds',
     'profiles',
     'Forum',
-    'chat',
+    'core',
     # 'notification',
     
 

@@ -50,6 +50,9 @@ class Profile(models.Model):
             # return self.user.following.count()
             return self.followers.count()
 
+        def get_all_followers_list(self):
+            return self.followers_set.all()
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
