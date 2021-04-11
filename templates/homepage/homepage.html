@@ -57,24 +57,68 @@
 <div class="container card-seaction ">
         <div class="row">
 
-        {% for post in allpostinhome%} 
+        {% for post in allpostinhome %} 
         
             <div class="col-md-4">
                 <div class="card p-3 m-2 card-type">
                 
                     <div class="d-flex flex-row mb-3"><img src="{{ post.author.profile_picture.url }}" width="70">
-                        <div class="d-flex flex-column ml-2"><span>@{{ post.author }}</span><span class="text-black-50">{{post.post_date|timesince}}</span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
+                        <div class="d-flex flex-column ml-2"><span>@{{ post.author }}</span><span class="text-black-50">{{post.post_date|timesince}}</span>
+                        <span >
+                                     
+          <div class="pr-2">
+          <span class="" id="like_count">{{post.count_like}}</span>
+          <button class="btn btn-link text-dark p-0 border-0 btn-outline-light" id="like-button" value="{{post.id}}">
+            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-heart" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+            </svg>
+          </button>
+        </div>          
+                        
+                        </span>
+                        </div>
                     </div>
                   <a href='{% url 'user_feeds:articale-detail' post.pk %}'>
                     <h6>{{ post.title }}</h6>
-                    <div class="d-flex justify-content-between install mt-3"><span>#{{post.category}}</span>
-                    <a href='{% url 'user_feeds:articale-detail' post.pk %}'>
+                    <div class="d-flex justify-content-between install mt-3">
+                    <span>#{{post.category}}</span>
+
+                  {% comment %} <a href='{% url 'user_feeds:articale-detail' post.pk %}'>
                      <span class="is-primary">View&nbsp;<i class="fa fa-angle-right"></i></span>
-                    </a>
+                    </a> {% endcomment %}
+                    
+
+
+ {% if request.user.is_authenticated %}
+
+      {% if fav %}
+      <div>
+        <a href="{% url 'user_feeds:favourite_list' %}" class="">Remove
+          Favourties</a>
+      </div>
+      {% else %}
+      <div>
+        <a href="{% url 'user_feeds:favourite_add' post.id %}" class="">Add to
+          Favourties</a>
+      </div>
+    {% endif %}
+
+      {% else %}
+      <div>
+        <a href="{% url 'profiles:signup' %}" class="">Add to
+          Favourties</a>
+      </div>
+      {% endif %}
+    </div>
+
+
+
                     </div>
                  </a>
                 </div>
-            </div>
+            <!-- </div> -->
          
            
         {% endfor %}  
@@ -108,6 +152,33 @@
       </p>
     </div>
   </footer> 
+
+
+<script>
+
+  $(document).on('click', '#like-button', function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '{% url "user_feeds:like" %}',
+      data: {
+        postid: $('#like-button').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        action: 'post'
+      },
+      success: function (json) {
+        document.getElementById("like_count").innerHTML = json['result']
+      },
+      error: function (xhr, errmsg, err) {
+
+      }
+    });
+  })
+</script>
+
+
+
+
 
 {% endblock %}
 

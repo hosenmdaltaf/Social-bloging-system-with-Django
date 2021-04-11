@@ -26,10 +26,10 @@ def follow_and_unfolow(request):
         pk= request.POST.get('profile_pk')
         obj= Profile.objects.get(pk=pk)
 
-        if obj.user in my_profile.following.all():
-            my_profile.following.remove(obj.user)
+        if obj.user in my_profile.followers.all():
+            my_profile.followers.remove(obj.user)
         else:
-            my_profile.following.add(obj.user)
+            my_profile.followers.add(obj.user)
         return redirect(request.META.get('HTTP_REFERER'))
     return redirect('profiles:all_profile')
     
@@ -44,7 +44,19 @@ class Profile_list_View(ListView):
     def get_queryset(self):
         return Profile.objects.all().exclude(user=self.request.user)
 
-    
+class SearchResultsView(ListView):
+    model = Profile
+    template_name = 'profiles/search.html'
+    context_object_name = 'profiles_list_search'
+
+    def get_queryset(self): # new
+        query = self.request.GET.get('q')
+        object_list = Profile.objects.filter(
+            Q(user__username__icontains=query) | Q(full_name__icontains=query)
+        )
+        return object_list
+
+
 
 #post Create page view
 class ProfileCreateView(CreateView):
@@ -72,7 +84,7 @@ class ProfileDetailView(DetailView):
         context = super().get_context_data(*args,**kwargs)
         view_profile = self.get_object()
         my_profile = Profile.objects.get(user=self.request.user)
-        if view_profile.user in my_profile.following.all():
+        if view_profile.user in my_profile.followers.all():
             follow=True
         else:
             follow= False

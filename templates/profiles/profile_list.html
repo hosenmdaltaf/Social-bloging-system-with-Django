@@ -4,7 +4,7 @@
 
 {% include 'homepage/navbar.html' %}
 
-    <h1>profiles:{{profiles_list}}</h1>
+
     {% for profile in profiles_list%}
 
  <div class="columns is-mobile">
@@ -23,33 +23,14 @@
             <strong>{{profile.user}} </strong>
         </a>
             <br>
-        <div class="buttons">
-
-       {% if follow %}
-          <form action="{% url 'profiles:follow_and_unfolow' %}" method="POST">
-            {% csrf_token %}
-            <input type='hidden' name='profile_pk' class="button is-primary" value='{{profiles_list.pk}}' />
-            <button type='submit' class="button is-primary">UnFollow</button>
-          </form>
-          {% else %}
-               <form action="{% url 'profiles:follow_and_unfolow' %}" method="POST">
-                  {% csrf_token %}
-                    <input type='hidden' name='profile_pk' class="button is-primary" value='{{profiles_list.pk}}' />
-                    <button type='submit' class="btn btn-sm btn-primary w-50 ml-2 ">Follow</button> 
-               </form>
-              {% comment %} <button type='submit' class="button is-primary">Follow</button> {% endcomment %}
-          {% endif %} 
-        </div> 
-       
           </p>
         </div>
       </div>
     </article>
-  <p>------------------------------</P>
+  <p>------------------------------</P> 
  </div>
  </div>
+  {% endfor %}
 
-    
-    {% endfor %}
-    
+ 
 {% endblock %}

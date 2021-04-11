@@ -19,7 +19,7 @@
         </div>
       </a>
 
-     <a href="#" class="nav__link">
+     <a href="{% url 'chat:chatmessage'  user.username %}" class="nav__link">
         <div class="links">
           <div class="icon">
             <i class='bx bxs-message-rounded-dots'></i>
@@ -36,7 +36,7 @@
           <span>Dig Drive</span>
         </div>
       </a>
-          <a href="#" class="nav__link">
+          <a href="{% url 'user_feeds:favourite_list' %}" class="nav__link">
         <div class="links">
           <div class="icon">
             <i class='bx bx-note'></i>
@@ -119,13 +119,14 @@
 
     <section id="main-dashboard-content">
       <section id="top-section">
-
-      <form method="GET" >
+{% comment %} <form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Search...">
+</form> {% endcomment %}
+      <form action="{% url 'profiles:search_results' %}" method="GET" >
         <div class="input-box">
-          <input placeholder="Search..." type="text" name='search-area' value="{{search_input}}" />
+          <input name="q" type="text" placeholder="Search..." value="{{search_input}}" />
           <div>
-            <i class='bx bx-search-alt-2'type="submit" value='Search'></i>
-
+            {% comment %} <i class='bx bx-search-alt-2' type="submit" value='Search'></i> {% endcomment %}
       </form>
           </div>
         </div>
@@ -184,7 +185,22 @@
                         <ul class="list-inline">
                           <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="#">Rating</a></li>
                           <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="#">comment count</a></li>
-                        
+
+                  <li class="list-inline-item mx-2">
+                        {% if fav %}
+                        <div>
+                          <a href="{% url 'user_feeds:favourite_list' %}" class=""><p>Remove
+                            Favourties</p></a>
+                        </div>
+                        {% else %}
+                        <div>
+                          <a href="{% url 'user_feeds:favourite_add' post.id %}" class=""><p>Add to
+                            Favourties</p></a>
+                        </div>
+                      {% endif %}
+
+                    </li>
+                       
                         </ul>
             
                         <p class="text-muted post-content">{{ post.content|truncatechars:100 }}</p>

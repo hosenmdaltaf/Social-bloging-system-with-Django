@@ -34,7 +34,7 @@
                                     <div class="p-2  d-flex justify-content-between rounded text-white stats ">
                                         <div class="d-flex flex-column"> <span class="articles">Articles</span> <span class="number1">{{profiles.get_posts_no}}</span> </div>
                                         <div class="d-flex flex-column"> <span class="followers">Followers</span> <span class="number2">{{profiles.count_followers}}</span> </div>
-                                        <div class="d-flex flex-column"> <span class="rating">Following</span> <span class="number3">{{profiles.following.count }}</span> </div>
+                                        <div class="d-flex flex-column"> <span class="rating">Following</span> <span class="number3">{{profiles.count_following }}</span> </div>
                                     </div>
                                     <div class=" mb-5 mt-2 d-flex flex-row align-items-center "> 
                                         <button class="btn btn-md btn-outline-primary w-250 ml-2 ">Chat</button> 
@@ -48,7 +48,9 @@
                                             <form action="{% url 'profiles:follow_and_unfolow' %}" method="POST">
                                                 {% csrf_token %}
                                                 <input type='hidden' name='profile_pk' class="button is-primary" value='{{profiles.pk}}' />
-                                                <button type='submit' class="btn btn-md btn-primary w-250 ml-2 ">Follow</button> 
+                                                {% if request.user.pk != profiles.pk %}
+                                                    <button type='submit' class="btn btn-md btn-primary w-250 ml-2 ">Follow</button> 
+                                                {% endif %} 
                                             </form>
                                             {% comment %} <button class="btn btn-sm btn-primary w-50 ml-2 ">Follow</button>  {% endcomment %}
                                         {% endif %} 

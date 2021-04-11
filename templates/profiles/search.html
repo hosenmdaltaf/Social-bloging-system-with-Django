@@ -1,0 +1,42 @@
+
+{% extends 'homepage/main.html' %}
+
+{% block content %}
+
+{% include 'homepage/navbar.html' %}
+
+<h1>Search Results</h1>
+{% if profiles_list_search %}
+    {% for profile in profiles_list_search %}
+    <div class="columns is-mobile">
+    <div class="column is-half is-offset-one-quarter">
+        <article class="media">
+        <figure class="media-left">
+            <p class="image is-48x48">
+            <img src="{{profile.profile_picture.url}}">
+            </p>
+        </figure>
+        <div class="media-content ">
+            <div class="content">
+            <p>
+            {% comment %} profile.get_absolute_url {% endcomment %}
+            <a href="{% url 'profiles:my_profile' profile.pk %}">
+                <strong>{{profile.user}} </strong>
+            </a>
+                <br>
+            </p>
+            </div>
+        </div>
+        </article>
+    <p>------------------------------</P> 
+    </div>
+    </div>
+        {% endfor %}
+
+    {% else %}
+
+   <h1>Sorry we dont't find any user on this name...........</h1>
+
+   {% endif %}
+
+    {% endblock %}

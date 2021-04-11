@@ -30,8 +30,12 @@ INSTALLED_APPS = [
     'homepage',
     'user_feeds',
     'profiles',
-    'Forum', 
+    'Forum',
+    'chat',
+    # 'notification',
+    
 
+    'channels',
     'crispy_forms',  
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -65,6 +69,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'altaf.wsgi.application'
+
+ASGI_APPLICATION = 'altaf.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 
 # Database
@@ -123,4 +137,6 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+BASE_URL = "http://127.0.0.1:8000"
 

@@ -15,6 +15,8 @@ class Post(models.Model):
     post_updated = models.DateField(auto_now=True)
     image=models.ImageField(upload_to='post_images', blank=True, null=True)
     category = models.ForeignKey('Category',on_delete=models.CASCADE, null=True, blank=True)
+    favourites = models.ManyToManyField(
+        User, related_name='favourite', default=None, blank=True)
     # tags = TaggableManager()
 #     rating = models.IntegerField()
 #     security=
@@ -22,18 +24,26 @@ class Post(models.Model):
 #    share
     view_count=models.IntegerField(default=0)
    # slug=models.SlugField(blank=True,unique=True)
+    likes = models.ManyToManyField(
+        User, related_name='like', default=None, blank=True)
+    like_count = models.BigIntegerField(default='0')
+
+
 
     def __str__(self):
         return str(self.author) + '---' + str(self.title)
  
-    # def get_absolute_url(self):
-    #     return reverse('user_feeds:articale-detail', kwargs={'pk':self.pk})
+    def get_absolute_url(self):
+        return reverse('user_feeds:articale-detail', kwargs={'id':self.id})
 
     class Meta:
         ordering = ['-post_date']
 
     def num_comments(self):
         return self.comment_set.all().count()
+
+    def count_like(self):
+        return self.likes.count()
 
 
 
@@ -62,6 +72,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return str(self.created_by)
+
+  
 
 
 

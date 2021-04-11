@@ -16,8 +16,8 @@ class Profile(models.Model):
         bio=  models.CharField(max_length=300,null=True,blank=True)
         hide_email=  models.BooleanField(default=True)
         full_name=  models.CharField(max_length=30,null=True,blank=True)
-        following=  models.ManyToManyField(User, related_name='following',blank=True)
-        # followers = models.ManyToManyField(User, related_name='following', blank=True)
+        # following=  models.ManyToManyField(User, related_name='followers',blank=True)
+        followers = models.ManyToManyField(User, related_name='following', blank=True)
         work=  models.CharField(max_length=500,null=True,blank=True)
         loaction=  models.CharField(max_length=100,null=True,blank=True)
         educations=  models.CharField(max_length=500,null=True,blank=True)
@@ -43,18 +43,12 @@ class Profile(models.Model):
             return self.profile_set.all()
 
         def count_followers(self):
-            return self.following.count()
+            # return self.followers.count()
+            return self.user.following.count()
     
-        # def count_following(self):
-        #     return Profile.objects.filter(following=User).count()
-
-
-
-        # def get_following(self):
-        #      return self.following.all()
-
-        # def get_following_no(self):
-        #     return self.following.all().count() 
+        def count_following(self):
+            # return self.user.following.count()
+            return self.followers.count()
 
 
 @receiver(post_save, sender=User)
