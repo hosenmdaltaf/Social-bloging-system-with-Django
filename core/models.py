@@ -14,13 +14,16 @@ class MessageModel(Model):
     the message body.
 
     """
-    user = ForeignKey(User, on_delete=CASCADE, verbose_name='user',
-                      related_name='from_user', db_index=True)
-    recipient = ForeignKey(User, on_delete=CASCADE, verbose_name='recipient',
-                           related_name='to_user', db_index=True)
-    timestamp = DateTimeField('timestamp', auto_now_add=True, editable=False,
-                              db_index=True)
-    body = TextField('body')
+    #db_index=True,
+    user = models.ForeignKey(User, on_delete=CASCADE, verbose_name='user',
+                      related_name='from_user', null=True, blank=True)
+
+    recipient =  models.ForeignKey(User, on_delete=CASCADE, verbose_name='recipient',
+                           related_name='to_user', null=True, blank=True )
+    timestamp = models.DateTimeField(auto_now_add=True)  
+                            
+    # DateTimeField('timestamp', auto_now_add=True, editable=False
+    body =  models.TextField('body')
 
     def __str__(self):
         return str(self.id)
@@ -133,13 +136,13 @@ class GroupMessage(Model):
     the message body.
 
     """
-    sender = ForeignKey(User, on_delete=CASCADE, verbose_name='sender',
-                      related_name='from_sender', db_index=True)
-    group = ForeignKey(Group, on_delete=CASCADE, verbose_name='group',
+    sender =models.ForeignKey(User, on_delete=CASCADE, verbose_name='sender',
+                      related_name='from_sender', db_index=True, null=True, blank=True)
+    group =  models.ForeignKey(Group, on_delete=CASCADE, verbose_name='group',
                            related_name='to_group', db_index=True)
-    time = DateTimeField('time', auto_now_add=True, editable=False,
+    time =  models.DateTimeField('time', auto_now_add=True, editable=False,
                               db_index=True)
-    body = TextField('body')
+    body =  models.TextField('body')
 
     def __str__(self):
         return str(self.id)

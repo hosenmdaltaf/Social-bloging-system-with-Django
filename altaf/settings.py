@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     
 
     'channels',
+    'rest_framework',
     'crispy_forms',  
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -71,6 +72,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'altaf.wsgi.application'
 
 ASGI_APPLICATION = 'altaf.routing.application'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
+}
+
+MESSAGES_TO_LOAD = 15
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',

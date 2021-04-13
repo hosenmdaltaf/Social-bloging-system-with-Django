@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+
+
 {% load static %}
 
 {% block main %}
@@ -15,11 +17,6 @@
                     <a href="" class="list-group-item disabled">
                         <h4 class="list-group-item-heading">Users</h4>
                         {# Users go here #}
-                        {% for followerlist in ChatConsumer.get_all_followers_list %}
-                           {% endfor %}
-                        {%  followers_set.all() %}
-                        
-                       
                     </a>
                 </div>
                 <div id="group-list" class="list-group">

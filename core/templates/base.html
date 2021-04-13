@@ -1,13 +1,11 @@
-{% comment %} {%extends 'homepage/main.html' %} {% endcomment %}
 {% load static %}
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="Toy Chat Application"> 
+    <meta name="description" content="Toy Chat Application">
     <title>{% block title %}Welcome{% endblock %} Nfor Esperance</title>
-
 
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -18,7 +16,7 @@
     {% block head %}
     {% endblock %}
 </head>
-<body> 
+<body>
 
 {% include 'header.html' %}
 
@@ -26,4 +24,4 @@
 {% endblock %}
 
 </body>
-</html> 
+</html>

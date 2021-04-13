@@ -12,6 +12,7 @@ urlpatterns = [
     path('discussion_forum/', include('Forum.urls')),
 
     path('messages/', include('core.urls')),
+   
   
 ]
 

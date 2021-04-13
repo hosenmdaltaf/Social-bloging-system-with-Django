@@ -9,12 +9,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'user_feeds:profile-page' %}">
+            <a class="navbar-brand" href="{% url 'core:home' %}">
                 <i class="fa fa-comments"></i> ChatApp
-            </a> 
+            </a>
         </div>
 
-        <div id="navbar" class="navbar-collapse collapse">
+        {% comment %} <div id="navbar" class="navbar-collapse collapse">
 
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
@@ -25,14 +25,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'profiles:logout' %}">
+                        <a href="{% url 'core:logout' %}">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             Log Out
                         </a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="{% url 'profiles:login' %}">
+                        <a href="{% url 'core:login' %}">
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
                             Log In
                         </a>
@@ -40,6 +40,6 @@
                 {% endif %}
             </ul>
 
-        </div>
+        </div> {% endcomment %}
     </div>
 </nav>
