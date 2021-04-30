@@ -45,33 +45,32 @@ The project has been developed as a MEAN stack Angular 6 CRUD Web Application. T
   <img src = "https://imgur.com/IzjUXp5.png">
 </p>
 
-Below is a brief list of some of the technologies used. For a comprehensive list of dependencies see [here](https://github.com/Final-Year-Project-Cian-Kevin/final-project/blob/master/package.json)
+Below is a brief list of some of the technologies used. For a comprehensive list of dependencies see [here](https://github.com/hosenmdaltaf/Social-bloging-system-with-Django/blob/master/requirement.txt)
 
 - **Languages**: 
     - JavaScript
-    - TypeScript
     - HTML 
     - CSS
+    - Python
 - **Libraries**: 
     - Bootstrap
-    - Mongoose
-    - Angular Material
+    - Bulma
 - **Frameworks**: 
-    - Angular 6.0.1
-    - Express
-    - Swagger
+    - Django
+    -Django REST framework
+    -Django Channels
 - **Databases**:
-    - MongoDB
+    - postgresql
+    - Redis
 - **Environments**: 
-    - NodeJs
+    - windows
 - **Development Software**
-    - Postman
+    - Docker
     - Visual Studio Code   
     - Git
 
 # Prerequisites
-* MongoDB installed.
-* Nodejs installed.
+* python installed.
 * Git or git bash to clone the project.
 * Access to an internet browser.
 
@@ -83,7 +82,7 @@ Clone this repository to your machine.
 - Navigate to an empty directory
 - In command prompt 
 ```bash
-	> git clone https://github.com/Final-Year-Project-Cian-Kevin/final-project.git
+	> git clone https://github.com/hosenmdaltaf/Social-bloging-system-with-Django.git
 ```
 
 ## Run The Development Server
@@ -92,10 +91,13 @@ To deploy locally navigate to the project directory in cmd.
 Run the following command to build the project and launch the server:
 
 ```bash
-    > npmstart
+    > cd Social-bloging-system-with-Django
+    > pip install -r requirements.txt
+    > python manage.py runserver
+   
 ```
 
-The server will now be running and connected to the MongoDB. Navigate to ```localhost:3000`` to view the application.
+The server will now be running . Navigate to ```localhost:127.0.0.1:8000`` to view the application.
 
 # Deployment
 This application is currently deployed on an AWS instance. Click [Here to TechBook live](http://34.243.30.50:3000/index)
