@@ -73,6 +73,7 @@ Below is a brief list of some of the technologies used. For a comprehensive list
 * python installed.
 * Git or git bash to clone the project.
 * Access to an internet browser.
+* I highly recommend stay with django version 3.0 and python version 3.9.4(for avoiding any complicity)
 
 
 # Deploy Project locally
