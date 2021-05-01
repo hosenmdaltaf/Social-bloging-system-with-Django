@@ -17,7 +17,9 @@
             <div class="col-md-4">
                 <a class="text-dark" href="{{post.get_absolute_url}}">
                     <div class="card mb-4 box-shadow">
+                        {% if post.image %}
                         <img class="card-img-top" src="{{post.image.url}}" alt="{{ post.title }}">
+                        {% endif %}
                         <div class="card-body">
                             <h2 style="font-size:18px;font-weight:bold">{{post.title|truncatechars:50}}</h2>
                             <p class="card-text">{{post.excerpt|truncatechars:50}}</p>

@@ -6,6 +6,8 @@ from .models import Answer
 from .models import Category
 from user_feeds.models import Post
 from .forms import DiscussionForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.generic import (
     # DetailView,
     CreateView,
@@ -15,6 +17,7 @@ from django.views.generic import (
 
 )
 
+@login_required(login_url ='/profiles/login/')
 def discuss_seaction_home(request):
    
     category = request.GET.get('category')
@@ -61,9 +64,10 @@ def discuss_seaction_details(request,id):
 
 
 #post Create page view
+@method_decorator(login_required, name='dispatch')
 class DiscussCreateView(CreateView):
     model= Discussion
-    fields= ['title','qustion','image','category']
+    fields= ['title','qustion','image']
     template_name='Forum/discuss_create_form.html'
     success_url = reverse_lazy("Forum:forum_homepage")  
 
@@ -73,9 +77,10 @@ class DiscussCreateView(CreateView):
 
 
 #post Update page view
+@method_decorator(login_required, name='dispatch')
 class DiscussUpdateView(UpdateView):
     model= Discussion
-    fields ='__all__'
+    fields =['title','qustion','image','category']
     # fields = ['title','image','details']
     template_name='Forum/discuss_update_form.html'
     success_url = reverse_lazy("Forum:profile-page")
@@ -86,6 +91,7 @@ class DiscussUpdateView(UpdateView):
 
 
 #post Delete page view
+@method_decorator(login_required, name='dispatch')
 class DiscussDeleteView(DeleteView):
     model= Discussion
     template_name='Forum/discuss_delete_form.html'

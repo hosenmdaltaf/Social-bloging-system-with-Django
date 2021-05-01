@@ -50,15 +50,22 @@
       <div class="field has-addons">
 
 <form method="GET" >
-        <p class="control">
-          <input class="input is-primary" type="text" name='search-area' value="{{search_input}}" >
-        </p>
-        <p class="control">
-           <input class="button" type="submit" value='Search'>
-         {% comment %} <button class="button is-primary" type="submit" value='Search'>
-            Search
-        </button>  {% endcomment %}
-        </p>
+
+
+  <div class="columns">
+    <div class="column is-narrow">
+      <p class="control">
+        <input class="input is-primary" type="text" name='search-area' value="{{search_input}}" >
+      </p>
+      
+    </div>
+    <div class="column">
+      <p class="control">
+        <input class="button" type="submit" value='Search'>
+     </p>
+    </div>
+  </div>
+
 </form>
       </div>
     </div>

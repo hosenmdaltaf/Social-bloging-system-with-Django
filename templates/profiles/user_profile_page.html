@@ -26,7 +26,7 @@
                                 </h1>
                                   <p class="mb-3">@
                                     {{profiles.user}} 
-                                </p>
+                                </p> 
                                 <h6 class="mb-3">
                                     {{profiles.bio}}                               
                                 </h6>
@@ -174,7 +174,9 @@
                         <div class="container card-seaction ">
                             <div class="row">
                             
-                        <p>There will all posts by user</p>
+                        
+                        {% if profiles.get_all_authors_posts %}
+
                               {% for post in profiles.get_all_authors_posts %}
                                 <div class="col-md-4">
                                     <div class="card p-3 m-2 card-type">
@@ -192,6 +194,14 @@
                                     </div>
                                 </div>
                              {% endfor %}
+
+                             {% else%}
+                                <p>{{profiles.user}} is not create any post yet!!</p>
+                                
+                             {% endif%}
+
+
+
                             </div>
                         </div>
 

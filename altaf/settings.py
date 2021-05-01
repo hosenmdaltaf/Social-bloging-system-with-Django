@@ -156,3 +156,6 @@ GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
 }
+
+# DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+LOGIN_URL='/profiles/login/'

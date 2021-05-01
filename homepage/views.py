@@ -2,6 +2,7 @@ from django.shortcuts import render
 # from django.views.generic.list import ListView
 from user_feeds.models import Post
 from user_feeds.models import Category
+from django.core.paginator import Paginator
 
 
 # class HomepageListView(ListView):
@@ -19,8 +20,14 @@ def home(request):
     else:
         allpostinhome = Post.objects.filter(category__name=category)
     categories = Category.objects.all()
+  
+
+    # paginator = Paginator( posts, 6) # Show 6 contacts per page.
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
    
-    return render(request,'homepage/homepage.html',{'allpostinhome':allpostinhome,'categories':categories})
+    return render(request,'homepage/homepage.html',{'allpostinhome':allpostinhome,
+    'categories':categories})
 
 
 # def latest(request):

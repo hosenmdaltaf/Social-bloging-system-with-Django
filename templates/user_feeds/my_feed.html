@@ -63,14 +63,6 @@
         </div>
     </a>
 
-     <a href="{% url 'profiles:profile_create' %}" class="nav__link">
-        <div class="links">
-          <div class="icon">
-              <i class='bx bxs-user'></i>
-          </div>
-          <span>Profile Creations</span>
-        </div>
-          </a>
 
    <a href="{% url 'profiles:all_profile'   %}" class="nav__link">
     {% comment %} {% url 'account:edit'  user.id %} {% endcomment %}
@@ -101,32 +93,28 @@
         </div>
           </a>
 
-        
+      </section>
 
-     
-          <a href="{% url 'user_feeds:post-create' %}" class="nav__link">
-            <div class="links">
-              <div class="icon">
-                 <i class='bx bx-export'></i>
-              </div>
-              <span>Post</span>
-            </div>
-              </a>
-      
+     <hr>
+     <section class="title-container">
+
+
+
+
       </section>
 
     </section>
 
     <section id="main-dashboard-content">
       <section id="top-section">
-<!-- {% comment %} <form action="{% url 'search_results' %}" method="get">
+{% comment %} <form action="{% url 'search_results' %}" method="get">
   <input name="q" type="text" placeholder="Search...">
-</form> {% endcomment %} -->
+</form> {% endcomment %}
       <form action="{% url 'profiles:search_results' %}" method="GET" >
         <div class="input-box">
           <input name="q" type="text" placeholder="Search..." value="{{search_input}}" />
           <div>
-            <!-- {% comment %} <i class='bx bx-search-alt-2' type="submit" value='Search'></i> {% endcomment %} -->
+            {% comment %} <i class='bx bx-search-alt-2' type="submit" value='Search'></i> {% endcomment %}
       </form>
           </div>
         </div>
@@ -137,25 +125,24 @@
           <div class="action-icon-two"><img src="{{ user.profile.profile_picture.url }}"></div>
         </div>
       </section>
-   
 
 
     {% comment %} <div class="secondnavbar">
-      <h2>Latest</h2>
-      <h2>Toprated</h2>
-      <h2>Trending</h2>
-      {% for cat in allposts %}
+    <h2>Latest</h2>
+    <h2>Toprated</h2>
+    <h2>Trending</h2>
+    {% for cat in allposts %}
+ 
+        <h2>{{cat.category}}</h2>
+
+    {% endfor %}
    
-          <h2>{{cat.category}}</h2>
-  
-      {% endfor %}
-     
-     
-    </div> {% endcomment %}
-  
-  
-  
-  {% comment %} </section> {% endcomment %}
+   
+  </div> {% endcomment %}
+
+
+
+{% comment %} </section> {% endcomment %}
 
 
 <section id="feed">

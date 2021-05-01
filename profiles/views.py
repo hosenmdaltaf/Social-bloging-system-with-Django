@@ -9,7 +9,7 @@ from django.http import Http404
 from django.urls import reverse_lazy
 from django.views.generic import (
       DetailView,
-      CreateView,
+    #   CreateView,
       UpdateView,
       ListView,
       DeleteView
@@ -17,9 +17,10 @@ from django.views.generic import (
 
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
 
 
+@login_required(login_url ='/profiles/login/')
 def follow_and_unfolow(request):
     if request.method =='POST':
         my_profile = Profile.objects.get(user=request.user)
@@ -32,9 +33,9 @@ def follow_and_unfolow(request):
             my_profile.followers.add(obj.user)
         return redirect(request.META.get('HTTP_REFERER'))
     return redirect('profiles:all_profile')
+
     
-
-
+@method_decorator(login_required, name='dispatch')
 class Profile_list_View(ListView):
     model = Profile
     # paginate_by = 3
@@ -44,6 +45,8 @@ class Profile_list_View(ListView):
     def get_queryset(self):
         return Profile.objects.all().exclude(user=self.request.user)
 
+
+@method_decorator(login_required, name='dispatch')
 class SearchResultsView(ListView):
     model = Profile
     template_name = 'profiles/search.html'
@@ -58,18 +61,7 @@ class SearchResultsView(ListView):
 
 
 
-#post Create page view
-class ProfileCreateView(CreateView):
-    model=Profile
-    fields=['profile_picture','bio','full_name','work','loaction','educations']
-    template_name='profiles/profile_create_form.html'
-    success_url = reverse_lazy("profiles:profile_create")
-
-    def form_valid(self,form):
-        form.instance.author =self.request.user
-        return super().form_valid(form)
-
-
+@method_decorator(login_required, name='dispatch')
 class ProfileDetailView(DetailView):
     model = Profile
     context_object_name = 'profiles'
@@ -91,7 +83,8 @@ class ProfileDetailView(DetailView):
         context['follow'] = follow 
         return context
 
-#post Update page view
+
+@method_decorator(login_required, name='dispatch')
 class ProfileUpdateView(UpdateView):
     model = Profile
     # context_object_name = 'profiles'
@@ -100,11 +93,11 @@ class ProfileUpdateView(UpdateView):
     success_url = reverse_lazy("user_feeds:profile-page")
 
     # def form_valid(self,form):
-    #     form.instance.author =self.request.user
+    #     form.instance = self.request.user
     #     return super().form_valid(form)
 
 
-#post Delete page view
+@method_decorator(login_required, name='dispatch')
 class ProfileDeleteView(DeleteView):
     model=Profile
     # context_object_name = 'profile_delete'
@@ -119,8 +112,6 @@ class ProfileDeleteView(DeleteView):
 #     # profiles = get_object_or_404(Profile, id=id)
 #     # profiles= Profile.objects.get(user=request.user)
 #     return render(request,'profiles/user_profile_page.html',{'profiles':profiles})
-
-
 
 
 def signup(request):
@@ -163,6 +154,7 @@ def login_view(request):
     return render(request,'profiles/login.html',{'form':form})
 
 
+@login_required(login_url ='/profiles/login/')
 def logout_view(request):
     if request.method == 'POST':
         logout(request)

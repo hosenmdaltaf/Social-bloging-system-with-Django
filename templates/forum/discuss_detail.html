@@ -74,13 +74,12 @@
         <p>No comments here yet :</p>
 {% endfor  %}
                  
-
+   {% if request.user.is_authenticated %}
                   <div class="contact-form article-comment">
                       <h4>Leave a Reply</h4>
                       <form id="contact-form" method="POST">
                           {% csrf_token  %}
                           <div class="row">
-                             
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <textarea name="text" id="message" placeholder="Your message *" rows="4" class="form-control"></textarea>
@@ -94,7 +93,23 @@
                           </div>
                       </form>
                   </div>
+              
+
+     {% else%}
+
+              <div class="card">
+                <div class="card-content">
+                  <div class="content">
+                    <h6>Want to leave a Reply?</h6>
+                    <p>Join our free amazing coummity.To Learn and teach together for growup quick.</p>
+                    <a href="{% url 'profiles:signup' %}"> <h2 style="text-align: center;">Signup</h2></a>  
+                  </div>
+                </div>
               </div>
+                          
+     {% endif %}
+    </div>
+
 
 
   {% comment %} <div class="col-lg-4 m-15px-tb blog-aside">

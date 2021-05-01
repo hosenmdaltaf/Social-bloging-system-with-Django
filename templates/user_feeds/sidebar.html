@@ -20,6 +20,31 @@
                             </div>
                             <p>{{user.profile.bio}}</p>
                         </div>
+
+
+
+
+ <!-- widget Tags -->
+                  <div class="widget widget-tags">
+                      <div class="widget-title">
+                          <h3>Write New Blog</h3>
+                      </div>
+                      <div class="widget-body">
+                          
+
+                                <a href="{% url 'user_feeds:post-create' %}" class="nav__link">
+        	<div class="links">
+          <div class="icon">
+             <i class='bx bx-export'></i>
+          </div>
+          <h1>Post</h1>
+
+        </div>
+          </a>
+                      </div>
+                  </div>
+                  <!-- End widget Tags -->
+      
                     {% else%}
                           <div class="widget-body">
                             <div class="media align-items-center">
@@ -30,14 +55,12 @@
                                    <a href="{% url 'profiles:signup' %}"> <h6>Signup</h6></a>
                                 </div>
                             </div>
-                            <p>Join our amazing coummity.Learn and teach together for growup quick.</p>
+                            <p>Join our free amazing coummity.To Learn and teach together for growup quick.</p>
                         </div>
                     {% endif %}
 
                 </div>
                 <!-- End Author -->
-
-
                   <!-- Trending Post -->
                   <div class="widget widget-post">
                       <div class="widget-title">

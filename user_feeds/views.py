@@ -17,18 +17,14 @@ from profiles.models import Profile
 from user_feeds.models import Post
 from user_feeds.models import Comment
 from Forum.models import Discussion
-from itertools import chain
+# from itertools import chain
+# from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.utils.decorators import method_decorator
 
 
-# def sidebar(request):
-#     latest = Post.objects.order_by('-post_date')[:5]
-#     latets_forum_question = Discussion.objects.order_by('-qustion_date')[:3]
-#     return render(request,'user_feeds/sidebar.html',
-#     {'latest':latest,'latets_forum_question':latets_forum_question})
 
-
+@login_required(login_url ='/profiles/login/')
 def userFeedpage(request):
     latest= Post.objects.order_by('-post_date')[:5]
     latets_forum_question = Discussion.objects.order_by('-qustion_date')[:3]
@@ -47,10 +43,6 @@ def userFeedpage(request):
         allprofile = allprofile.filter(user__startswith=search_input)
     else:
         messages.success(request,f"Sorry we dont't find any user on this name..........." )
-
-
-    
-   
    #get logged in user profile
     profile = Profile.objects.get(user=request.user)
 
@@ -67,7 +59,7 @@ def userFeedpage(request):
     'latest':latest,'latets_forum_question':latets_forum_question,'search_input':search_input })
 
 
-@ login_required
+@login_required(login_url ='/profiles/login/')
 def like(request):
     if request.POST.get('action') == 'post':
         result = ''
@@ -87,7 +79,7 @@ def like(request):
         return JsonResponse({'result': result, })
 
 
-@ login_required
+@login_required(login_url ='/profiles/login/')
 def favourite_list(request):
     new = Post.objects.filter(favourites=request.user)
     return render(request,
@@ -95,7 +87,7 @@ def favourite_list(request):
                   {'new': new})
 
 
-@ login_required
+@login_required(login_url ='/profiles/login/')
 def favourite_add(request, id):
     post = get_object_or_404(Post, id=id)
     if post.favourites.filter(id=request.user.id).exists():
@@ -107,6 +99,7 @@ def favourite_add(request, id):
 
 
 #post Create page view
+@method_decorator(login_required,name='dispatch')
 class PostCreateView(CreateView):
     model=Post
     fields=['title','image','content','category']
@@ -161,19 +154,21 @@ def postdetail(request,id):
 #  ,'comments':comments
 
 #post Update page view
+@method_decorator(login_required,name='dispatch')
 class PostUpdateView(UpdateView):
     model = Post
-    fields ='__all__'
+    fields =['title','image','content','category']
     # fields = ['title','image','details']
     template_name='user_feeds/post_update_form.html'
     success_url = reverse_lazy("user_feeds:profile-page")
 
     def form_valid(self,form):
-        form.instance.author =self.request.user
+        form.instance.author =self.request.user.profile
         return super().form_valid(form)
 
 
 #post Delete page view
+@method_decorator(login_required,name='dispatch')
 class PostDeleteView(DeleteView):
     model=Post
     template_name='user_feeds/post_delete_form.html'
