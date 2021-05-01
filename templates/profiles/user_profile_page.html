@@ -37,7 +37,7 @@
                                         <div class="d-flex flex-column"> <span class="rating">Following</span> <span class="number3">{{profiles.count_following }}</span> </div>
                                     </div>
                                     <div class=" mb-5 mt-2 d-flex flex-row align-items-center "> 
-                                        <button class="btn btn-md btn-outline-primary w-250 ml-2 ">Chat</button> 
+                                        <button class="btn btn-md btn-outline-primary w-250 ml-2 "><a href ="{% url 'core:home'  %}">Chat</a></button> 
                                          {% if follow %}
                                             <form action="{% url 'profiles:follow_and_unfolow' %}" method="POST">
                                                 {% csrf_token %}

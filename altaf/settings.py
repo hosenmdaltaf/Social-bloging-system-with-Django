@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'core',
     # 'notification',
     
-
     'channels',
     'rest_framework',
     'crispy_forms',  
@@ -153,3 +152,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 BASE_URL = "http://127.0.0.1:8000"
 
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
