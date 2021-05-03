@@ -1,9 +1,8 @@
-# Social-bloging-system-with-Django
 
-<h1 align="center">Fourth Year Applied Project And Minor Dissertation </h1>
+<h1 align="center">Social blogging community platform with Django</h1>
 
 **Social bloging platform** : <br/><br/>
-<img src="./projectimages/projectlogo.png" width=600 />
+<img src="./projectimages/projectcover.png" width=600 />
 
 # Overview
 Social media today plays an expanding significant role in society, the information technology industry and the field of computer science. The use of social media is a hot-topic for many organizations, with the aim to identify approaches in which companies can use applications to increase profits and grow product awareness. On a day-to-day basis, users from across the globe are becoming increasingly frustrated, wasting valuable time, scrolling through irrelevant content while companies are wasting money advertising to users outside their market.  In order to achieve the optimal benefits from social media, for both users and businesses, the development of these technologies require approaches that focus on specific human interests and values.
@@ -12,10 +11,14 @@ Social media today plays an expanding significant role in society, the informati
 This project aims to deliver a solution by developing a platform with the goal of delivering a social experience that targets a specific user base. As the authors are in the field of computer science the focus of the content will be to appeal to the tech savvy user. The proposed solution will be a web application that will offer a unique online community to users and businesses interested in technology.
 
 # Introduction
-The project has been developed as a MEAN stack Angular 6 CRUD Web Application. The initial  project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.1. The system utilises a 3 tier architecture using MongoDB, ExpressJs, Angular and NodeJs.
+
+This project is designed to meet the requirements of Social blogging community Site. It has been developed in django keeping in mind the specification of the system.
+    • Using system analysis and design techniques like data flow diagram designing the system.
+    • Understanding the database handling.
+    • Understanding and applying the logic required for the pooling process.
 
 
-**Techbook** is a social bloging platform that offers a unique experience offering a community for users interested in technology to communicate.
+**Altaf** is a social bloging platform that offers a unique experience offering a community for users interested in technology to communicate.
 
 # Features
 ## Application features
@@ -51,7 +54,7 @@ The project has been developed as a MEAN stack Angular 6 CRUD Web Application. T
 # Technologies
 
 <p align="center">
-  <img src = "https://imgur.com/IzjUXp5.png">
+  <img src = "./images/technology.png">
 </p>
 
 Below is a brief list of some of the technologies used. For a comprehensive list of dependencies see [here](https://github.com/hosenmdaltaf/Social-bloging-system-with-Django/blob/master/requirement.txt)
@@ -66,8 +69,8 @@ Below is a brief list of some of the technologies used. For a comprehensive list
     - Bulma
 - **Frameworks**: 
     - Django
-    -Django REST framework
-    -Django Channels
+    - Django REST framework
+    - Django Channels
 - **Databases**:
     - postgresql
     - Redis
@@ -79,6 +82,17 @@ Below is a brief list of some of the technologies used. For a comprehensive list
     - Git
     - Github
 
+# Database design
+
+**Database schema tables/models diagram** : <br/><br/>
+* This diagram shows relations and dependent betweens each models 
+<img src="./projectimages/databasetablerelation.png" width=600 />
+
+**Database schema diagram table fields** : <br/><br/>
+> ⚠  Please note that multipoint,multipolygon feild is most of them actually ForeignKey and some of them are OneToOneField & ManyToManyField
+* This diagram shows all the fields in each models/table
+<img src="./projectimages/databasefield.png" width=600 />
+
 # Prerequisites
 * python installed.
 * Git or git bash to clone the project.
@@ -88,71 +102,99 @@ Below is a brief list of some of the technologies used. For a comprehensive list
 # Deploy Project locally
 
 ## Download the Project
-Clone this repository to your machine.
+-> Clone this repository to your machine using the following command.
 - Navigate to an empty directory
 - In command prompt 
-```bash
-	> git clone https://github.com/hosenmdaltaf/Social-bloging-system-with-Django.git
-```
-
-## Run The Development Server
-To deploy locally navigate to the project directory in cmd. 
-
-Run the following command to build the project and launch the server:
 
 ```bash
-    > cd Social-bloging-system-with-Django
-    > pip install -r requirements.txt
-    > python manage.py runserver
-   
+git clone https://github.com/hosenmdaltaf/Social-bloging-system-with-Django.git
+# After cloning, move into the directory having the project files using the change directory command
+cd Social-bloging-system-with-Django
+```
+-> Now create a virtual environment where all the required python packages will be installed
+```bash
+# Use this on Windows
+py -3 -m venv env
+# Use this on Linux and Mac
+python -m venv env
+```
+-> Activate the virtual environment
+```bash
+# Windows
+.\env\Scripts\activate
+# Linux and Mac
+source env/bin/activate
+```
+-> Install all the project Requirements
+```bash
+pip install -r requirements.txt
+```
+-> Finally, run the django development server
+```bash
+# apply migrations and create your database
+python manage.py migrate
+
+# Create a user with manage.py
+python manage.py createsuperuser
+
+# run django development server
+python manage.py runserver
 ```
 
-The server will now be running . Navigate to ```localhost:127.0.0.1:8000`` to view the application.
+## Explore admin panel for model data or instances
+http://127.0.0.1:8000/admin or http://localhost:8000/admin
+
+<br/>
+
+## Login with the user credentials you just created using createsuperuser command
+
+<br />
+
+> ⚠ If everything is good and has been done successfully, **Application** should be hosted on port 8000 i.e http://127.0.0.1:8000/ or http://localhost:8000/
+
 
 # Deployment
 This application is currently deployed on an AWS instance. Click [Here to TechBook live](http://34.243.30.50:3000/index)
 
 # Preview
 Below is a preview of some of the applications pages rendered on both a mobile device and PC.
-_Please note these are the inital screenshots of the pages and may have changed by the time the project is submitted_. To view all pages click 
-[Here for TechBook live](http://34.243.30.50:3000/index). An indepth explanation of each page is available in *System Design* section of the
-[Dissertation](https://github.com/Final-Year-Project-Cian-Kevin/Dissertation/blob/master/project.pdf). 
+_Please note these are the inital screenshots of the pages and may have changed by the time the project is submitted_. 
 
 
 ## 📸 Screenshots :
 
 **Homepage** : <br/><br/>
-<img src="./projectimages/homepage.PNG" width=600 />
+<img src="./projectimages/homepage.png" width=600 />
 
 **User Feed** : <br/><br/>
-<img src="./projectimages/userfeedpage.PNG" width=600 />
+<img src="./projectimages/userfeedpage.png" width=600 />
 
 **User Profile Page** : <br/><br/>
-<img src="./images/profilepage.PNG" width=600 />
+<img src="./images/profilepage.png" width=600 />
 
 **Blogdetail Page** : <br/><br/>
-<img src="./images/postdetail.PNG" width=600 />
+<img src="./images/postdetail.png" width=600 />
 
 **Discussion/Question Page** : <br/><br/>
-<img src="./images/discussion-page.PNG" width=600 />
+<img src="./images/forumhomepage.png" width=600 />
 
 **Chat home Page** : <br/><br/>
-<img src="./images/discussion-page.PNG" width=600 />
+<img src="./images/chatpage.png" width=600 />
 
 **Favourite Page** : <br/><br/>
-<img src="./images/discussion-page.PNG" width=600 />
+<img src="./images/favouritepage.png" width=600 />
 
 **Register Page** : <br/><br/>
-<img src="./images/login-page.PNG" width=600 />
+<img src="./images/registrationpage.png" width=600 />
 
 **Login Page** : <br/><br/>
-<img src="./images/login-page.PNG" width=600 />
+<img src="./images/loginpage.png" width=600 />
 
 **Settings Page** : <br/><br/>
-<img src="./images/login-page.PNG" width=600 />
+<img src="./images/settingpage.png" width=600 />
 
-**Friends Page** : <br/><br/>
-<img src="./images/login-page.PNG" width=600 />
+**Profilelist Page** : <br/><br/>
+<img src="./images/profilelist.png" width=600 />
 
 
 
