@@ -1,9 +1,7 @@
 # Social-bloging-system-with-Django
 
 <h1 align="center">Fourth Year Applied Project And Minor Dissertation </h1>
-<p align="center">
-  <img src = "projectimages/projectlogo.png">
-</p>
+
 **Social bloging platform** : <br/><br/>
 <img src="./projectimages/projectlogo.png" width=600 />
 
