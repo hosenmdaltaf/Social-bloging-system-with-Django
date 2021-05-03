@@ -4,6 +4,8 @@
 <p align="center">
   <img src = "projectimages/projectlogo.png">
 </p>
+**Social bloging platform** : <br/><br/>
+<img src="./projectimages/projectlogo.png" width=600 />
 
 # Overview
 Social media today plays an expanding significant role in society, the information technology industry and the field of computer science. The use of social media is a hot-topic for many organizations, with the aim to identify approaches in which companies can use applications to increase profits and grow product awareness. On a day-to-day basis, users from across the globe are becoming increasingly frustrated, wasting valuable time, scrolling through irrelevant content while companies are wasting money advertising to users outside their market.  In order to achieve the optimal benefits from social media, for both users and businesses, the development of these technologies require approaches that focus on specific human interests and values.
@@ -84,11 +86,6 @@ Below is a brief list of some of the technologies used. For a comprehensive list
 * Git or git bash to clone the project.
 * Access to an internet browser.
 * I highly recommend stay with django version 3.0 and python version 3.9.4(for avoiding any complicity)
-<<<<<<< HEAD
-
-=======
->>>>>>> 12db2bbc1ce13fe82b458ddbd288c3ea3f896218
-
 
 # Deploy Project locally
 
@@ -123,57 +120,41 @@ _Please note these are the inital screenshots of the pages and may have changed 
 [Here for TechBook live](http://34.243.30.50:3000/index). An indepth explanation of each page is available in *System Design* section of the
 [Dissertation](https://github.com/Final-Year-Project-Cian-Kevin/Dissertation/blob/master/project.pdf). 
 
-## Homepage
 
-Web view          |  Mobile view
-:-------------------------|:-------------------------:
-<img src = "https://imgur.com/iu7wpzq.png" height=300>|<img height = 300 src = "https://imgur.com/EcjDWP2.png">
+## 📸 Screenshots :
 
-## Userfeed Page
-Web view          |  Mobile view
-:-------------------------:|:-------------------------:
-<img src = "https://imgur.com/P0jQXTr.png" height=300>|<img height = 300 src = "https://imgur.com/NAcxvo1.png">
+**Homepage** : <br/><br/>
+<img src="./projectimages/homepage.PNG" width=600 />
 
-## Blogdetail Page
-Web view          |  Mobile view
-:-------------------------:|:-------------------------:
-<img src = "https://imgur.com/P0jQXTr.png" height=300>|<img height = 300 src = "https://imgur.com/NAcxvo1.png">
+**User Feed** : <br/><br/>
+<img src="./projectimages/userfeedpage.PNG" width=600 />
 
+**User Profile Page** : <br/><br/>
+<img src="./images/profilepage.PNG" width=600 />
 
-## Forum home Page
-Web view          |  Mobile view
-:-------------------------:|:-------------------------:
-<img src = "https://imgur.com/P0jQXTr.png" height=300>|<img height = 300 src = "https://imgur.com/NAcxvo1.png">
+**Blogdetail Page** : <br/><br/>
+<img src="./images/postdetail.PNG" width=600 />
 
+**Discussion/Question Page** : <br/><br/>
+<img src="./images/discussion-page.PNG" width=600 />
 
-## Chat home Page
-Web view          |  Mobile view
-:-------------------------:|:-------------------------:
-<img src = "https://imgur.com/P0jQXTr.png" height=300>|<img height = 300 src = "https://imgur.com/NAcxvo1.png">
+**Chat home Page** : <br/><br/>
+<img src="./images/discussion-page.PNG" width=600 />
 
-## Profile Page
-Web view          |  Mobile view
-:-------------------------:|:-------------------------:
-<img src = "https://imgur.com/P0jQXTr.png" height=300>|<img height = 300 src = "https://imgur.com/NAcxvo1.png">
+**Favourite Page** : <br/><br/>
+<img src="./images/discussion-page.PNG" width=600 />
 
-## Log in Page
-Web view          |  Mobile view
-:-------------------------:|:-------------------------:
-<img src = "https://imgur.com/5971dv6.png" height=300>|<img height = 300 src = "https://imgur.com/GmdtAyY.png">
+**Register Page** : <br/><br/>
+<img src="./images/login-page.PNG" width=600 />
 
-## Register Page
-Web view          |  Mobile view
-:-------------------------:|:-------------------------:
-<img src = "https://imgur.com/zL0xXo8.png" height=300>|<img height = 300 src = "https://imgur.com/DRw9UDk.png">
+**Login Page** : <br/><br/>
+<img src="./images/login-page.PNG" width=600 />
 
-## Settings Page
-Web view          |  Mobile view
-:-------------------------:|:-------------------------:
-<img src = "https://imgur.com/YWCvPvT.png" height=300>|<img height = 300 src = "https://imgur.com/PeI6lTm.png">
+**Settings Page** : <br/><br/>
+<img src="./images/login-page.PNG" width=600 />
 
-## Friends Page
-Web view          |  Mobile view
-:-------------------------:|:-------------------------:
-<img src = "https://imgur.com/qPBaLZb.png" height=300>|<img height = 300 src = "https://imgur.com/YjpegMl.png">
+**Friends Page** : <br/><br/>
+<img src="./images/login-page.PNG" width=600 />
+
 
 
