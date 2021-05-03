@@ -54,10 +54,10 @@ This project is designed to meet the requirements of Social blogging community S
 # Technologies
 
 <p align="center">
-  <img src = "./images/technology.png">
+  <img src = "./projectimages/technology.png">
 </p>
 
-Below is a brief list of some of the technologies used. For a comprehensive list of dependencies see [here](https://github.com/hosenmdaltaf/Social-bloging-system-with-Django/blob/master/requirement.txt)
+Below is a brief list of some of the technologies used. For a comprehensive list of dependencies see [here](https://github.com/hosenmdaltaf/Social-bloging-system-with-Django/blob/master/requirements.txt)
 
 - **Languages**: 
     - JavaScript
@@ -153,8 +153,8 @@ http://127.0.0.1:8000/admin or http://localhost:8000/admin
 > ⚠ If everything is good and has been done successfully, **Application** should be hosted on port 8000 i.e http://127.0.0.1:8000/ or http://localhost:8000/
 
 
-# Deployment
-This application is currently deployed on an AWS instance. Click [Here to TechBook live](http://34.243.30.50:3000/index)
+<!-- # Deployment
+This application is currently deployed on an AWS instance. Click [Here to TechBook live](http://34.243.30.50:3000/index) -->
 
 # Preview
 Below is a preview of some of the applications pages rendered on both a mobile device and PC.
@@ -170,31 +170,31 @@ _Please note these are the inital screenshots of the pages and may have changed 
 <img src="./projectimages/userfeedpage.png" width=600 />
 
 **User Profile Page** : <br/><br/>
-<img src="./images/profilepage.png" width=600 />
+<img src="./projectimages/profilepage.png" width=600 />
 
 **Blogdetail Page** : <br/><br/>
-<img src="./images/postdetail.png" width=600 />
+<img src="./projectimages/postdetail.png" width=600 />
 
 **Discussion/Question Page** : <br/><br/>
-<img src="./images/forumhomepage.png" width=600 />
+<img src="./projectimages/forumhomepage.png" width=600 />
 
 **Chat home Page** : <br/><br/>
-<img src="./images/chatpage.png" width=600 />
+<img src="./projectimages/chatpage.png" width=600 />
 
 **Favourite Page** : <br/><br/>
-<img src="./images/favouritepage.png" width=600 />
+<img src="./projectimages/favouritepage.png" width=600 />
 
 **Register Page** : <br/><br/>
-<img src="./images/registrationpage.png" width=600 />
+<img src="./projectimages/registrationpage.png" width=600 />
 
 **Login Page** : <br/><br/>
-<img src="./images/loginpage.png" width=600 />
+<img src="./projectimages/loginpage.png" width=600 />
 
 **Settings Page** : <br/><br/>
-<img src="./images/settingpage.png" width=600 />
+<img src="./projectimages/settingpage.png" width=600 />
 
 **Profilelist Page** : <br/><br/>
-<img src="./images/profilelist.png" width=600 />
+<img src="./projectimages/profilelist.png" width=600 />
 
 
 
