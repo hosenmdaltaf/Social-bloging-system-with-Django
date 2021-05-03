@@ -25,7 +25,7 @@ urlpatterns =[
     path('search/', SearchResultsView.as_view(), name='search_results'),
     # path('create/', ProfileCreateView.as_view(), name='profile_create'),
     path('update/<int:pk>', ProfileUpdateView.as_view(), name='profile_update'),
-    path('delete/<int:pk>', ProfileUpdateView.as_view(), name='profile_delete'),
+    path('delete/<int:pk>',  ProfileDeleteView.as_view(), name='profile_delete'),
 
     # path('my_profile/', My_profileView.as_view(), name='my_profile')
 ]

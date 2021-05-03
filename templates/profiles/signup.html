@@ -5,7 +5,8 @@
 
 {% include 'homepage/navbar.html' %}
 
-  <h1 class="col-md-6 offset-md-3 btn-secondary">Wellcome to NEw world,Sign Up first.To find NEw Test</h1> 
+  <!-- <h1 class="col-md-6 offset-md-3 btn-secondary">Wellcome to NEw world,Sign Up first.To find NEw Test</h1>  -->
+<h1 style="text-align: center; background-color: rgb(233, 236, 239);">🌹Wellcome to our free amazing coummity.🌹</h1>  
 <form method="POST" action="{% url 'profiles:signup' %}">
     {% csrf_token %}
     <div class="row">
@@ -22,22 +23,3 @@
 </div>
 {% endblock  %}
 
-
-
-<!-- <div class="content-section">
-    <form method="POST" action="{% url 'accounts:signup' %}">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Join Today</legend>
-            {{ form|crispy }}
-
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Sign Up </button>
-        </div>
-    </form>
-    <div class="border-top pt-3">
-        <small class="text-muted">Already Have An Account ?<a class="ml-2" href="{% url 'accounts:login'%}">Sign In</a>
-        </small>
-    </div>
-</div> -->

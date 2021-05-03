@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'homepage',
     'user_feeds',
     'profiles',
@@ -104,6 +105,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'mydb',
+#         'USER': 'myuser',
+#         'PASSWORD': 'mypass',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -152,10 +164,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 BASE_URL = "http://127.0.0.1:8000"
 
-GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
-}
-
 # DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 LOGIN_URL='/profiles/login/'
+

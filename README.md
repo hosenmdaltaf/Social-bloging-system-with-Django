@@ -2,7 +2,7 @@
 
 <h1 align="center">Fourth Year Applied Project And Minor Dissertation </h1>
 <p align="center">
-  <img src = "https://imgur.com/ZnsGF9x.png">
+  <img src = "projectimages/projectlogo.png">
 </p>
 
 # Overview
@@ -15,17 +15,18 @@ This project aims to deliver a solution by developing a platform with the goal o
 The project has been developed as a MEAN stack Angular 6 CRUD Web Application. The initial  project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.1. The system utilises a 3 tier architecture using MongoDB, ExpressJs, Angular and NodeJs.
 
 
-**Techbook** is a social media platform that offers a unique experience offering a community for users interested in technology to communicate.
+**Techbook** is a social bloging platform that offers a unique experience offering a community for users interested in technology to communicate.
 
 # Features
 ## Application features
-- An easy to use single page web application with responsive navbar. 
-- Full CRUD capabilities with restful API viewable with Swagger.
-- Fully functional MongoDB database with restrictions and validation.
+- An easy to use  web application with fully responsive design. 
+- Full CRUD capabilities .
+- Fully functional Postgress and redis database with restrictions and validation.
 - Sensitive data such as passwords is encrypted before adding to database.
 - Fully responsive GUI to adapt to all screen sizes.
-- Data and posts generated from Reddit API. 
+- Created for readers and writers best experence in mind. 
 - Server logging system.
+- Fully aunthenticated and authorizatied Secure for users
 
 ## User features
 - Can register an account.
@@ -34,10 +35,18 @@ The project has been developed as a MEAN stack Angular 6 CRUD Web Application. T
 - Can log out.
 - Can update profile info and upload profile image.
 - Can follow / unfollow other users.
-- Can subscribe / unsubscribe to posts.
-- Can view saved posts.
-- Can add a post.
-- Can comment on posts.
+- Can subscribe / unsubscribe to blogs.
+- Can view saved blogs.
+- Can add a blog.
+- Can update and delete own blog
+- Can comment on blog.
+- Can chat with each other
+- Can ask question in disscussion forum
+- Can update and delete own asked question
+- Can comment on another questions
+- Can search any question,blog,user 
+- Can find blog by category
+- Can find latest blogs for read on feed
 
 # Technologies
 
@@ -68,11 +77,14 @@ Below is a brief list of some of the technologies used. For a comprehensive list
     - Docker
     - Visual Studio Code   
     - Git
+    - Github
 
 # Prerequisites
 * python installed.
 * Git or git bash to clone the project.
 * Access to an internet browser.
+* I highly recommend stay with django version 3.0 and python version 3.9.4(for avoiding any complicity)
+
 
 
 # Deploy Project locally
@@ -111,8 +123,30 @@ _Please note these are the inital screenshots of the pages and may have changed 
 ## Homepage
 
 Web view          |  Mobile view
-:-------------------------:|:-------------------------:
+:-------------------------|:-------------------------:
 <img src = "https://imgur.com/iu7wpzq.png" height=300>|<img height = 300 src = "https://imgur.com/EcjDWP2.png">
+
+## Userfeed Page
+Web view          |  Mobile view
+:-------------------------:|:-------------------------:
+<img src = "https://imgur.com/P0jQXTr.png" height=300>|<img height = 300 src = "https://imgur.com/NAcxvo1.png">
+
+## Blogdetail Page
+Web view          |  Mobile view
+:-------------------------:|:-------------------------:
+<img src = "https://imgur.com/P0jQXTr.png" height=300>|<img height = 300 src = "https://imgur.com/NAcxvo1.png">
+
+
+## Forum home Page
+Web view          |  Mobile view
+:-------------------------:|:-------------------------:
+<img src = "https://imgur.com/P0jQXTr.png" height=300>|<img height = 300 src = "https://imgur.com/NAcxvo1.png">
+
+
+## Chat home Page
+Web view          |  Mobile view
+:-------------------------:|:-------------------------:
+<img src = "https://imgur.com/P0jQXTr.png" height=300>|<img height = 300 src = "https://imgur.com/NAcxvo1.png">
 
 ## Profile Page
 Web view          |  Mobile view
@@ -138,7 +172,5 @@ Web view          |  Mobile view
 Web view          |  Mobile view
 :-------------------------:|:-------------------------:
 <img src = "https://imgur.com/qPBaLZb.png" height=300>|<img height = 300 src = "https://imgur.com/YjpegMl.png">
-## About Page
-Web view          |  Mobile view
-:-------------------------:|:-------------------------:
-<img src = "https://imgur.com/dlZsXbL.png" height=300>|<img height = 300 src = "https://imgur.com/k8M3u58.png">
+
+

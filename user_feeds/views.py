@@ -40,7 +40,7 @@ def userFeedpage(request):
     search_input = request.GET.get('search-area') or ''
     allprofile = Profile.objects.all()
     if search_input:
-        allprofile = allprofile.filter(user__startswith=search_input)
+        allprofile = allprofile.filter(User__startswith=search_input)
     else:
         messages.success(request,f"Sorry we dont't find any user on this name..........." )
    #get logged in user profile
