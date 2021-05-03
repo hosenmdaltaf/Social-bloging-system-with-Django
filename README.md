@@ -4,6 +4,7 @@
 <p align="center">
   <img src = "projectimages/projectlogo.png">
 </p>
+![projectlogo](https://user-images.githubusercontent.com/64326036/116879967-f48bd580-ac53-11eb-959c-0a4a62c22707.png)
 
 # Overview
 Social media today plays an expanding significant role in society, the information technology industry and the field of computer science. The use of social media is a hot-topic for many organizations, with the aim to identify approaches in which companies can use applications to increase profits and grow product awareness. On a day-to-day basis, users from across the globe are becoming increasingly frustrated, wasting valuable time, scrolling through irrelevant content while companies are wasting money advertising to users outside their market.  In order to achieve the optimal benefits from social media, for both users and businesses, the development of these technologies require approaches that focus on specific human interests and values.
