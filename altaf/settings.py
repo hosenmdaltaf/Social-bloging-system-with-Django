@@ -1,4 +1,3 @@
-
 import os
 from pathlib import Path
 
@@ -15,7 +14,7 @@ SECRET_KEY = '5x$!hwlm7u@x#8ry=yz2(^6@-)w$w$e^ni^av&)fijbc72onk-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -28,16 +27,24 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'channels',
+    'django_private_chat2.apps.DjangoPrivateChat2Config',
+    'django_extensions',
+
     'homepage',
     'user_feeds',
     'profiles',
     'Forum',
-    'core',
+
+    'chat',
+
+    # 'core',
     # 'notification',
     
-    'channels',
+    # 'channels',
     'rest_framework',
-    'crispy_forms',  
+    'crispy_forms',
+
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -84,15 +91,20 @@ REST_FRAMEWORK = {
 
 MESSAGES_TO_LOAD = 15
 
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
+
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
 }
-
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -167,3 +179,4 @@ BASE_URL = "http://127.0.0.1:8000"
 # DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 LOGIN_URL='/profiles/login/'
 
+LOGIN_REDIRECT_URL = '/'

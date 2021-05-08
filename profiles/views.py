@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm     #UserCreationForm,
 from django.contrib.auth import login,logout
 from django.contrib import messages
 from .forms import UserRegisterForm
-from profiles.models import Profile
+from profiles.models import Profile, Notification
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.urls import reverse_lazy
@@ -19,20 +19,45 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+from django_private_chat2.models import DialogsModel
+
+
+# @method_decorator(login_required, name='dispatch')
+# class UserListView(ListView):
+#     model = User
+#     # These next two lines tell the view to index lookups by username
+#     slug_field = 'username'
+#     slug_url_kwarg = 'username'
+#     template_name = 'profiles/chats.html'
+#     login_url = '/profiles/login/'
+
 
 @login_required(login_url ='/profiles/login/')
 def follow_and_unfolow(request):
     if request.method =='POST':
-        my_profile = Profile.objects.get(user=request.user)
         pk= request.POST.get('profile_pk')
-        obj= Profile.objects.get(pk=pk)
+        target_user= User.objects.get(pk=pk)
+        existing_dialogs_model = DialogsModel.objects.filter(Q(user1=request.user, user2=target_user) | Q(user1=target_user, user2=request.user)).first()
 
-        if obj.user in my_profile.followers.all():
-            my_profile.followers.remove(obj.user)
+        if target_user in request.user.profile.followers.all():
+            notification_message = str(request.user.username) + " is unfollowed you"
+            request.user.profile.followers.remove(target_user)
+            if existing_dialogs_model:
+                existing_dialogs_model.delete()
         else:
-            my_profile.followers.add(obj.user)
+            notification_message = str(request.user.username) + " is following you"
+            request.user.profile.followers.add(target_user)
+            if (request.user in target_user.profile.followers.all()) and (not existing_dialogs_model):
+                DialogsModel.objects.create(user1=request.user, user2=target_user)
+        Notification.objects.create(sender=request.user, receiver=target_user, message=notification_message)
         return redirect(request.META.get('HTTP_REFERER'))
     return redirect('profiles:all_profile')
+
+
+@login_required
+def notification_view(request):
+    notifications = Notification.objects.filter(receiver=request.user)
+    return render(request,'profiles/notification.html',{'notifications':notifications})
 
     
 @method_decorator(login_required, name='dispatch')

@@ -7,7 +7,8 @@ from .views import(
       ProfileDeleteView,
       Profile_list_View,
       ProfileDetailView,
-      SearchResultsView
+      SearchResultsView,
+      # UserListView,
     #   My_ProfileDetailView
 )
 
@@ -18,6 +19,7 @@ urlpatterns =[
     path("login/",views.login_view,name='login'),
     path("logout/",views.logout_view,name='logout'),
     path("swith_follow/",views.follow_and_unfolow,name='follow_and_unfolow'),
+    path("notificatins/", views.notification_view, name="notifications"),
 
     # path("<int:id>/",views.profiles_detail,name='my_profile'),
     path('<int:pk>/',ProfileDetailView.as_view(), name='my_profile'),
@@ -26,6 +28,7 @@ urlpatterns =[
     # path('create/', ProfileCreateView.as_view(), name='profile_create'),
     path('update/<int:pk>', ProfileUpdateView.as_view(), name='profile_update'),
     path('delete/<int:pk>',  ProfileDeleteView.as_view(), name='profile_delete'),
+    # path('chat/', UserListView.as_view(), name='chat'),
 
     # path('my_profile/', My_profileView.as_view(), name='my_profile')
 ]

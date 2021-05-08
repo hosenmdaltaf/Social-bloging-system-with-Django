@@ -1,0 +1,25 @@
+{% extends 'homepage/main.html' %}
+
+{% block content %}
+
+{% include 'homepage/navbar.html' %}
+
+
+    
+
+ <div class="columns is-mobile">
+ <div class="column is-half is-offset-one-quarter">
+  {% if notifications.count < 1 %}
+    <h1>No notifications created yet</h1>
+  {% endif %}
+  {% for notification in notifications %}
+  <ul>
+    <li>{{ notification.message }}</li>
+  </ul>
+  {% endfor %}
+ </div>
+ </div>
+  
+
+ 
+{% endblock %}
