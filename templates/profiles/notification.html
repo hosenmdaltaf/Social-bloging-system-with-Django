@@ -4,10 +4,23 @@
 
 {% include 'homepage/navbar.html' %}
 
+<h1>total notification:{{get_notification_no}}</h1>
 
-    
+<div class="columns is-mobile">
+  <div class="column is-half is-offset-one-quarter">
+  {% if notifications.count < 1 %}
+     <h1>No notifications created yet</h1>
+  {% endif %}
+  {% for notification in notifications %}
+<div class="notification is-link">
+  <!-- <a href="{% url 'profiles:notification_delete' notification.id %}" ><button class="delete"></button></a> -->
+  {{ notification.message }}
+</div>
+{% endfor %}
+</div> 
+</div>
 
- <div class="columns is-mobile">
+ <!-- <div class="columns is-mobile">
  <div class="column is-half is-offset-one-quarter">
   {% if notifications.count < 1 %}
     <h1>No notifications created yet</h1>
@@ -18,7 +31,7 @@
   </ul>
   {% endfor %}
  </div>
- </div>
+ </div> -->
   
 
  

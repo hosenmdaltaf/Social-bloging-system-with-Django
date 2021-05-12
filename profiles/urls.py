@@ -8,6 +8,7 @@ from .views import(
       Profile_list_View,
       ProfileDetailView,
       SearchResultsView,
+      NotificationDeleteView,
       # UserListView,
     #   My_ProfileDetailView
 )
@@ -30,6 +31,6 @@ urlpatterns =[
     path('delete/<int:pk>',  ProfileDeleteView.as_view(), name='profile_delete'),
     # path('chat/', UserListView.as_view(), name='chat'),
 
-    # path('my_profile/', My_profileView.as_view(), name='my_profile')
+    path('notify_delete/<int:pk>', NotificationDeleteView.as_view(), name='notification_delete'),
 ]
 

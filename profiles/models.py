@@ -14,6 +14,12 @@ class Notification(models.Model):
     def __str__(self):
         return self.message
 
+    def get_notification_no(self):
+        return self.notification_set.all()
+
+        #     def get_all_profiles(self):
+        # return self.profile_set.all()
+ 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")

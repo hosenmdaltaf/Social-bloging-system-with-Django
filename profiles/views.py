@@ -18,18 +18,8 @@ from django.views.generic import (
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
 from django_private_chat2.models import DialogsModel
 
-
-# @method_decorator(login_required, name='dispatch')
-# class UserListView(ListView):
-#     model = User
-#     # These next two lines tell the view to index lookups by username
-#     slug_field = 'username'
-#     slug_url_kwarg = 'username'
-#     template_name = 'profiles/chats.html'
-#     login_url = '/profiles/login/'
 
 
 @login_required(login_url ='/profiles/login/')
@@ -58,6 +48,14 @@ def follow_and_unfolow(request):
 def notification_view(request):
     notifications = Notification.objects.filter(receiver=request.user)
     return render(request,'profiles/notification.html',{'notifications':notifications})
+
+
+@method_decorator(login_required, name='dispatch')
+class NotificationDeleteView(DeleteView):
+    model= Notification
+    # context_object_name = 'profile_delete'
+    template_name='profiles/notification_delete_form.html'
+    success_url = reverse_lazy("profiles:notifications")
 
     
 @method_decorator(login_required, name='dispatch')

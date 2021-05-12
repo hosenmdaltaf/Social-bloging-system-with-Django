@@ -30,20 +30,17 @@ INSTALLED_APPS = [
     'channels',
     'django_private_chat2.apps.DjangoPrivateChat2Config',
     'django_extensions',
+    'rest_framework',
+    'crispy_forms',
 
     'homepage',
     'user_feeds',
     'profiles',
     'Forum',
-
     'chat',
 
-    # 'core',
-    # 'notification',
-    
-    # 'channels',
-    'rest_framework',
-    'crispy_forms',
+
+    # 'notification', 
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -79,15 +76,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'altaf.wsgi.application'
 
 ASGI_APPLICATION = 'altaf.routing.application'
-
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated'
-    ],
-    'DEFAULT_PAGINATION_CLASS':
-        'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 100
-}
 
 MESSAGES_TO_LOAD = 15
 

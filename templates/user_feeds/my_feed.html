@@ -150,6 +150,7 @@
           <div class="container   ">
           <div class="row  align-items-start  ">
             <div class="col-lg-8 post_class2   m-15px-tb">
+      
 
         {% for post in allposts  %}
  
@@ -168,6 +169,9 @@
                           <li class="list-inline-item mr-2"><a class="category-link font-weight-normal" href="#">{{post.category}} </a></li>    
                           <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="{% url 'profiles:my_profile' post.author.pk  %}">{{ post.author }}</a></li>
                           <li class="list-inline-item mx-2"><a class="text-uppercase meta-link font-weight-normal" href="#">{{post.post_date|timesince}}</a></li>
+                          {% if is_recommendation_posts %}
+                            <li class="list-inline-item mx-2">Recommendate for you</li>
+                          {% endif %}
                         </ul>
                         <h2 class="h3 post-title mb-4"> <a class="d-block reset-anchor" href="{% url 'user_feeds:articale-detail' post.pk %}">{{ post.title }}</a></h2>
                         <ul class="list-inline">

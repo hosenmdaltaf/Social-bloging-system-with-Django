@@ -1,0 +1,47 @@
+{%extends 'homepage/main.html' %}
+{% load static %}
+{% block content %}
+
+{% comment %} <h1>working on recommenditon</h1> {% endcomment %}
+{% include 'homepage/navbar.html' %}
+
+<h1>working on recommenditon</h1>
+
+{{similar_posts}}
+
+<div class="container card-seaction ">
+        <div class="row">
+
+        {% for post in similar_posts %}
+
+          <!-- <h1>{{post.title}}</h1>
+          <h1>{{post.content}}</h1>
+          <h1>##{{post.category}}</h1>
+          <h1>@{{post.author}}</h1 -->
+            
+        <div class="col-md-4">
+                <div class="card p-3 m-2 card-type">
+                
+                    <div class="d-flex flex-row mb-3"><img src="{{ post.author.profile_picture.url }}" width="70">
+                        <div class="d-flex flex-column ml-2"><span>@{{ post.author }}</span><span class="text-black-50">{{post.post_date|timesince}}</span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
+                    </div>
+                
+                    <h6>{{ post.title }}</h6>
+                    <div class="d-flex justify-content-between install mt-3"><span>#{{post.category}}</span>
+                
+                     <span class="is-primary">View&nbsp;<i class="fa fa-angle-right"></i></span>
+               
+                    </div>
+        
+                </div>
+            </div>
+          
+
+        {% endfor %}
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

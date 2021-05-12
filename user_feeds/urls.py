@@ -12,8 +12,6 @@ app_name='user_feeds'
 
 urlpatterns = [
     path('',views.userFeedpage,name='profile-page'),
-    # path('',views.sidebar,name='sidebar-page'),
-    # path('', UserFeedpageListView.as_view(), name='profile-page'),
     path('post/<int:id>',views.postdetail,name='articale-detail'),
     path('post/new',PostCreateView.as_view(),name='post-create'), 
     path('post/<int:pk>/update/', PostUpdateView.as_view(),name='post-update'),
@@ -23,5 +21,3 @@ urlpatterns = [
     path('profile/favourites/', views.favourite_list, name='favourite_list'),
     path('like/', views.like, name='like'),
 ]
-
-# path('post/<int:pk>',PostDetailView.as_view(),name='articale-detail'),

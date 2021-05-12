@@ -14,13 +14,41 @@ from django.views.generic.edit import(
 )
 from .forms import CommentForm 
 from profiles.models import Profile
-from user_feeds.models import Post
+from user_feeds.models import Post,Category
 from user_feeds.models import Comment
 from Forum.models import Discussion
 # from itertools import chain
 # from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
+from .utils import get_recommendations
+import sys
+
+# import random
+
+# def pandas(request):
+
+#     post_objects = []
+
+#     similar_posts = get_recommendations('10 movies along with their release dates.')
+
+#     for item in similar_posts.tolist():
+#         if len(post_objects) > 6:
+#             break
+#         post = Post.objects.get(pk=item)
+#         post_objects.append(post)
+    
+#     if len(post_objects) < 6:
+#         all_posts = list(Post.objects.all())
+#         random_post_number = 6 - len(post_objects)
+#         random_posts = random.sample(all_posts, random_post_number)
+#         for random_post in random_posts:
+#             post_objects.append(random_post)
+
+#     context={ 'similar_posts':post_objects }
+
+#     return render(request,'user_feeds/panda.html',context)
 
 
 
@@ -31,11 +59,6 @@ def userFeedpage(request):
 
     allposts =Post.objects.all()
     # post = get_object_or_404(Post, id=id)
-
-    # fav = bool
-
-    # if post.favourites.filter(id=request.user.id).exists():
-    #     fav = True
     
     search_input = request.GET.get('search-area') or ''
     allprofile = Profile.objects.all()
@@ -52,11 +75,17 @@ def userFeedpage(request):
 
     users |= User.objects.filter(pk=request.user.pk)
 
+    is_recommendation_posts = False
     following_posts = allposts.filter(author__user__id__in = users)
+
+    if len(following_posts) < 1:
+        is_recommendation_posts = True
+        following_posts = get_recommendations()
 
     
     return render(request,'user_feeds/my_feed.html',{'allposts':following_posts,
-    'latest':latest,'latets_forum_question':latets_forum_question,'search_input':search_input })
+    'latest':latest,'latets_forum_question':latets_forum_question,
+    'search_input':search_input, 'is_recommendation_posts':is_recommendation_posts})
 
 
 @login_required(login_url ='/profiles/login/')
@@ -148,10 +177,12 @@ def postdetail(request,id):
             comments_form = CommentForm() 
 
     comments=Comment.objects.filter(post=post)
-    return render(request,'user_feeds/detail.html',{'details':details,
-    'comments':comments,'latest':latest,'latets_forum_question':latets_forum_question })
 
-#  ,'comments':comments
+    similar_posts = get_recommendations(post.title, 6)
+
+    return render(request,'user_feeds/detail.html',{'details':details,
+    'comments':comments,'latest':latest,'latets_forum_question':latets_forum_question,'similar_posts':similar_posts })
+
 
 #post Update page view
 @method_decorator(login_required,name='dispatch')
