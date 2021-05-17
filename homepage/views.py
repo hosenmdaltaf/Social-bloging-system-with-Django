@@ -13,21 +13,26 @@ from django.core.paginator import Paginator
   
 
 def home(request):
-    
+
     category = request.GET.get('category')
     if category == None:
-        allpostinhome = Post.objects.all()
+        posts = Post.objects.all()
     else:
-        allpostinhome = Post.objects.filter(category__name=category)
+        posts = Post.objects.filter(category__name=category)
     categories = Category.objects.all()
-  
 
-    # paginator = Paginator( posts, 6) # Show 6 contacts per page.
-    # page_number = request.GET.get('page')
-    # page_obj = paginator.get_page(page_number)
+    # posts = Post.objects.all()
+    paginator = Paginator( posts , 6) # Show 6 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
    
-    return render(request,'homepage/homepage.html',{'allpostinhome':allpostinhome,
-    'categories':categories})
+
+   
+    return render(request,'homepage/homepage.html',{'posts':page_obj,'categories':categories,})
+
+    # 'allpostinhome':allpostinhome,
+    # 'categories':categories,
 
 
 # def latest(request):

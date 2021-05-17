@@ -2,64 +2,37 @@ from django.shortcuts import render,get_object_or_404,redirect,HttpResponseRedir
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.views.generic import (
-     DetailView,
-     CreateView,
-     ListView,
-    #  DeleteView
-)
-from django.views.generic.edit import(
-        DeleteView,
-        UpdateView
-)
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 from .forms import CommentForm 
 from profiles.models import Profile
 from user_feeds.models import Post,Category
 from user_feeds.models import Comment
 from Forum.models import Discussion
-# from itertools import chain
-# from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-
 from .utils import get_recommendations
-import sys
 
-# import random
+from django.views.generic import (
+     DetailView,
+     CreateView,
+     ListView,
+)
+from django.views.generic.edit import(
+        DeleteView,
+        UpdateView
+)
 
-# def pandas(request):
 
-#     post_objects = []
-
-#     similar_posts = get_recommendations('10 movies along with their release dates.')
-
-#     for item in similar_posts.tolist():
-#         if len(post_objects) > 6:
-#             break
-#         post = Post.objects.get(pk=item)
-#         post_objects.append(post)
-    
-#     if len(post_objects) < 6:
-#         all_posts = list(Post.objects.all())
-#         random_post_number = 6 - len(post_objects)
-#         random_posts = random.sample(all_posts, random_post_number)
-#         for random_post in random_posts:
-#             post_objects.append(random_post)
-
-#     context={ 'similar_posts':post_objects }
-
-#     return render(request,'user_feeds/panda.html',context)
 
 
 
 @login_required(login_url ='/profiles/login/')
 def userFeedpage(request):
-    latest= Post.objects.order_by('-post_date')[:5]
+    latest= Post.objects.order_by('-post_date')[:3]
     latets_forum_question = Discussion.objects.order_by('-qustion_date')[:3]
 
     allposts =Post.objects.all()
-    # post = get_object_or_404(Post, id=id)
-    
+
     search_input = request.GET.get('search-area') or ''
     allprofile = Profile.objects.all()
     if search_input:
@@ -77,35 +50,28 @@ def userFeedpage(request):
 
     is_recommendation_posts = False
     following_posts = allposts.filter(author__user__id__in = users)
-
+    #if length of user total following_post less than one means user maybe first created his account or his following user didnot
+    #created any post yet at that point our machine learing model suggest five post automaticily for him/her to read.
+    
     if len(following_posts) < 1:
         is_recommendation_posts = True
         following_posts = get_recommendations()
+    #showing post viewed post as treanding .Here I query database for getting top 5 viewed post
+    treanding_posts = Post.objects.all().order_by('view_count')[0:3]
+
+    context={
+        'allposts':following_posts,
+        'latest':latest,
+        'latets_forum_question':latets_forum_question,
+        'search_input':search_input, 
+        'is_recommendation_posts':is_recommendation_posts,
+        'treanding_posts':treanding_posts,
+
+    }
 
     
-    return render(request,'user_feeds/my_feed.html',{'allposts':following_posts,
-    'latest':latest,'latets_forum_question':latets_forum_question,
-    'search_input':search_input, 'is_recommendation_posts':is_recommendation_posts})
+    return render(request,'user_feeds/my_feed.html',context)
 
-
-@login_required(login_url ='/profiles/login/')
-def like(request):
-    if request.POST.get('action') == 'post':
-        result = ''
-        id = int(request.POST.get('postid'))
-        post = get_object_or_404(Post, id=id)
-        if post.likes.filter(id=request.user.id).exists():
-            post.likes.remove(request.user)
-            post.like_count -= 1
-            result = post.like_count
-            post.save()
-        else:
-            post.likes.add(request.user)
-            post.like_count += 1
-            result = post.like_count
-            post.save()
-
-        return JsonResponse({'result': result, })
 
 
 @login_required(login_url ='/profiles/login/')
@@ -141,27 +107,19 @@ class PostCreateView(CreateView):
         form.instance.author =self.request.user.profile
         return super().form_valid(form)
 
-   
-# #Detailpage view
-# class PostDetailView(DetailView):
-#     model=Post
-#     context_object_name = 'details'
-#     template_name='user_feeds/detail.html'
-
-#     def get_context_data(self,*args,**kwargs):
-#         context = super().get_context_data(*args,**kwargs)
-#         context['latest']= Post.objects.order_by('-date')[:5]
-#         return context
-
-#     def get_queryset(self):
-#          return Post.objects.all()
 
 
 def postdetail(request,id): 
     details=Post.objects.get(id=id)
     post = get_object_or_404(Post, id=id)
-    latest= Post.objects.order_by('-post_date')[:5]
+    latest= Post.objects.order_by('-post_date')[:3]
     latets_forum_question = Discussion.objects.order_by('-qustion_date')[:3]
+
+    #Counting every visit by user and saving that to our model/database for query
+    post.view_count = post.view_count+1
+    post.save()
+    #showing post viewed post as treanding .Here I query database for getting top 5 viewed post
+    treanding_posts = Post.objects.all().order_by('view_count')[0:3]
    
     comments_form = CommentForm()   
 
@@ -178,10 +136,20 @@ def postdetail(request,id):
 
     comments=Comment.objects.filter(post=post)
 
+    #for recommedation system .it will top 6 matching post and show as suggestions
     similar_posts = get_recommendations(post.title, 6)
 
-    return render(request,'user_feeds/detail.html',{'details':details,
-    'comments':comments,'latest':latest,'latets_forum_question':latets_forum_question,'similar_posts':similar_posts })
+    context ={
+        'details':details,
+        'comments':comments,
+        'latest':latest,
+        'latets_forum_question':latets_forum_question,
+        'similar_posts':similar_posts,
+        'treanding_posts':treanding_posts
+
+    }
+
+    return render(request,'user_feeds/detail.html',context)
 
 
 #post Update page view
@@ -204,3 +172,33 @@ class PostDeleteView(DeleteView):
     model=Post
     template_name='user_feeds/post_delete_form.html'
     success_url = reverse_lazy("user_feeds:profile-page")
+
+
+
+
+
+
+# import random
+
+# def pandas(request):
+
+#     post_objects = []
+
+#     similar_posts = get_recommendations('10 movies along with their release dates.')
+
+#     for item in similar_posts.tolist():
+#         if len(post_objects) > 6:
+#             break
+#         post = Post.objects.get(pk=item)
+#         post_objects.append(post)
+    
+#     if len(post_objects) < 6:
+#         all_posts = list(Post.objects.all())
+#         random_post_number = 6 - len(post_objects)
+#         random_posts = random.sample(all_posts, random_post_number)
+#         for random_post in random_posts:
+#             post_objects.append(random_post)
+
+#     context={ 'similar_posts':post_objects }
+
+#     return render(request,'user_feeds/panda.html',context)

@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'crispy_forms',
+   
 
     'homepage',
     'user_feeds',
@@ -168,3 +170,4 @@ BASE_URL = "http://127.0.0.1:8000"
 LOGIN_URL='/profiles/login/'
 
 LOGIN_REDIRECT_URL = '/'
+

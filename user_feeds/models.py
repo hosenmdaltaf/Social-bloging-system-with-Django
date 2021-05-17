@@ -1,9 +1,9 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
-# from account.models import Account
-# from taggit.managers import TaggableManager
 from django.contrib.auth.models import User
+
+
 from profiles.models import Profile
 
 
@@ -17,16 +17,8 @@ class Post(models.Model):
     category = models.ForeignKey('Category',on_delete=models.CASCADE, null=True, blank=True)
     favourites = models.ManyToManyField(
         User, related_name='favourite', default=None, blank=True)
-    # tags = TaggableManager()
-#     rating = models.IntegerField()
-#     security=
-#    comment
-#    share
     view_count=models.IntegerField(default=0)
-   # slug=models.SlugField(blank=True,unique=True)
-    likes = models.ManyToManyField(
-        User, related_name='like', default=None, blank=True)
-    like_count = models.BigIntegerField(default='0')
+
 
 
 

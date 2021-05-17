@@ -19,5 +19,5 @@ urlpatterns = [
 
     path('fav/<int:id>/', views.favourite_add, name='favourite_add'),
     path('profile/favourites/', views.favourite_list, name='favourite_list'),
-    path('like/', views.like, name='like'),
+ 
 ]
