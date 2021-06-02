@@ -24,8 +24,6 @@ from django.views.generic.edit import(
 
 
 
-
-
 @login_required(login_url ='/profiles/login/')
 def userFeedpage(request):
     latest= Post.objects.order_by('-post_date')[:3]

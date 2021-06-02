@@ -34,8 +34,7 @@ class Post(models.Model):
     def num_comments(self):
         return self.comment_set.all().count()
 
-    def count_like(self):
-        return self.likes.count()
+    
 
 
 
